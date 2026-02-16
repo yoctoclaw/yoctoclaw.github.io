@@ -15,8 +15,6 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 .wizard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,#00ff8810,transparent 50%),radial-gradient(circle at 70% 30%,#00aaff08,transparent 40%);pointer-events:none}
 
 /* Pixel art krill */
-.krill-pixel{display:inline-grid;grid-template-columns:repeat(24,8px);gap:1px;margin-bottom:1rem;filter:drop-shadow(0 0 8px #ff886640) drop-shadow(0 0 16px #ff886620)}
-.krill-pixel span{width:8px;height:8px;border-radius:1px;display:block}
 
 .wizard-header h1{font-size:1.3rem;color:#00ff88;margin-bottom:0.25rem;position:relative}
 .wizard-header .tm{font-size:0.7rem;vertical-align:super}
@@ -91,7 +89,7 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 
 <div class="wizard">
 <div class="wizard-header">
-<div class="krill-pixel" id="krill-art"></div>
+<img src="assets/hero-banner.jpg" alt="KrillClaw" style="width:100%;max-width:350px;border-radius:10px;margin-bottom:1rem;display:block;margin-left:auto;margin-right:auto">
 <h1>KrillClaw<span class="tm">™</span></h1>
 <p>Setup Wizard</p>
 <div class="progress">
@@ -271,38 +269,7 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 </div>
 
 <script>
-// Pixel art krill - 24x16 grid, cute kawaii shrimp/krill
-// s=#ff8866 body, d=#ee6644 dark segment, h=#ffaa88 highlight, w=#ffffff eye, b=#000000 pupil, a=#dd7755 antenna, l=#cc5533 leg
-(function(){
-var rows=[
-  '0000000000000000a00a0000',
-  '00000000000000000aa00000',
-  '00000000000000hhsa000000',
-  '0000000000000hhswbs00000',
-  '00000000000000sssssds000',
-  '000000000000sdddsssss000',
-  '00000000000sssssddss0000',
-  '000000000ssdddsssss00000',
-  '00000000sssssddss0000000',
-  '000000ssdddssss000000000',
-  '0000000l00l00l0000000000',
-  '00000ssssssss00000000000',
-  '0000sssshhs0000000000000',
-  '000shh00hhs0000000000000',
-  '00sh00000sh0000000000000',
-  '000000000000000000000000'
-];
-var colors={s:'#ff8866',d:'#ee6644',h:'#ffaa88',w:'#ffffff',b:'#000000',a:'#dd7755',l:'#cc5533'};
-var el=document.getElementById('krill-art');
-for(var r=0;r<rows.length;r++){
-  for(var c=0;c<24;c++){
-    var px=document.createElement('span');
-    var ch=rows[r][c]||'0';
-    px.style.background=colors[ch]||'transparent';
-    el.appendChild(px);
-  }
-}
-})();
+// Banner image replaces pixel art
 
 function goStep(n){
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
