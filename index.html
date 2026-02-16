@@ -13,7 +13,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="KrillClaw — 180KB Edge AI Runtime">
 <meta name="twitter:description" content="The smallest AI agent runtime. 180KB. Zero deps. Runs on a $3 ESP32. Works with any LLM.">
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="canonical" href="https://krillclaw.github.io">
+<meta property="og:image" content="https://krillclaw.github.io/assets/og-image.jpg">
+<meta name="twitter:image" content="https://krillclaw.github.io/assets/og-image.jpg">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Fira Code',monospace;line-height:1.6}
@@ -33,6 +36,13 @@ h2{color:#00ff88;margin:3rem 0 1rem;font-size:1.5rem}
 footer{text-align:center;padding:3rem 0;color:#555;font-size:0.85rem;border-top:1px solid #1a1a1a;margin-top:3rem}
 a{color:#00ff88;text-decoration:none}
 a:hover{text-decoration:underline}
+
+.mascot-hero{width:180px;height:180px;border-radius:50%;border:3px solid #00ff88;box-shadow:0 0 40px #00ff8830;margin:0 auto 1.5rem;display:block;animation:mascotFloat 3s ease-in-out infinite}
+.mascot-inline{width:36px;height:36px;border-radius:50%;vertical-align:middle;margin-right:0.5rem;border:1px solid #00ff8860}
+.mascot-cta{width:80px;height:80px;border-radius:50%;border:2px solid #00ff88;margin:0 auto 1rem;display:block;animation:mascotFloat 3s ease-in-out infinite}
+.mascot-footer{width:40px;height:40px;border-radius:50%;opacity:0.6;vertical-align:middle;margin-right:0.5rem}
+@keyframes mascotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+
 .cta{display:inline-block;padding:1rem 2rem;background:#00ff88;color:#0a0a0a;font-weight:bold;border-radius:8px;font-size:1.1rem;margin:1rem 0.5rem;text-decoration:none}
 .cta:hover{background:#00cc6a;text-decoration:none}
 .cta.secondary{background:transparent;border:2px solid #00ff88;color:#00ff88}
@@ -102,6 +112,7 @@ dialog{animation:dialogIn 0.2s ease}
 <div class="container">
 
 <div class="hero">
+<img src="assets/mascot-hero.jpg" alt="KrillClaw Mascot — kawaii shrimp" class="mascot-hero">
 <h1>Every device gets an AI brain.</h1>
 <p class="tagline">KrillClaw™ — the smallest AI agent runtime for edge devices.</p>
 <p class="size">180KB</p>
@@ -132,7 +143,7 @@ export ANTHROPIC_API_KEY=...
 </div>
 
 <div class="section">
-<h2>How it compares</h2>
+<h2><img src="assets/mascot-small.jpg" alt="" class="mascot-inline">How it compares</h2>
 <p style="color:#888;margin-bottom:1rem;font-size:0.85rem">Embedded AI agent runtimes — a new category.</p>
 <table>
 <tr><th></th><th>KrillClaw™</th><th>MimiClaw</th><th>PicoClaw</th><th>OpenClaw</th></tr>
@@ -235,7 +246,7 @@ context.zig  — token management (225 lines)</pre>
 </div>
 
 <div class="section">
-<h2>What becomes possible</h2>
+<h2><img src="assets/mascot-small.jpg" alt="" class="mascot-inline">What becomes possible</h2>
 <p style="color:#888;margin-bottom:2rem">When every device has an AI brain and WiFi, ordinary things become extraordinary.</p>
 
 <div style="display:grid;grid-template-columns:1fr;gap:2rem;max-width:800px">
@@ -328,7 +339,7 @@ context.zig  — token management (225 lines)</pre>
 </div>
 
 <div class="section">
-<h2>Runs on a $3 chip</h2>
+<h2><img src="assets/mascot-small.jpg" alt="" class="mascot-inline">Runs on a $3 chip</h2>
 <p style="color:#888;margin-bottom:1.5rem">WiFi, BLE, and serial built in. Connects to any LLM over the air.</p>
 
 <div class="carousel-container">
@@ -377,6 +388,7 @@ context.zig  — token management (225 lines)</pre>
 </div>
 
 <div class="section" id="waitlist-section" style="text-align:center;padding:3rem 0">
+<img src="assets/mascot-hero.jpg" alt="KrillClaw Shrimp" class="mascot-cta">
 <h2>🦐 I Want One!</h2>
 <p style="color:#888;margin-bottom:1.5rem">Sign up to get pre-flashed KrillClaw™ devices.</p>
 <button onclick="document.getElementById('waitlist-dialog').showModal()" style="padding:1rem 2.5rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:1.1rem">I Want One!</button>
@@ -450,7 +462,7 @@ zig build -Doptimize=ReleaseSmall
 
 
 <footer>
-Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · Patent Pending<br style="margin-top:0.5rem"><a href="/privacy" style="color:#555">Privacy</a> · <a href="/terms" style="color:#555">Terms</a> · <a href="#" onclick="return false" title="Coming soon">Source</a>
+<img src="assets/mascot-small.jpg" alt="" class="mascot-footer">Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · Patent Pending<br style="margin-top:0.5rem"><a href="/privacy" style="color:#555">Privacy</a> · <a href="/terms" style="color:#555">Terms</a> · <a href="#" onclick="return false" title="Coming soon">Source</a>
 </footer>
 
 <script type="application/ld+json">
@@ -584,3 +596,4 @@ function wlSubmit(){
 </script>
 </body>
 </html>
+

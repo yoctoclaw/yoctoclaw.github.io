@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KrillClaw™ Setup Wizard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monospace;min-height:100vh;display:flex;justify-content:center;align-items:center;padding:1rem}
+
+.wizard{max-width:420px;width:100%;background:#111;border:1px solid #222;border-radius:16px;overflow:hidden}
+
+/* Header with krill art */
+.wizard-header{background:linear-gradient(135deg,#0a1a0f,#0a0a0a);padding:2rem;text-align:center;border-bottom:1px solid #1a1a1a;position:relative;overflow:hidden}
+.wizard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,#00ff8810,transparent 50%),radial-gradient(circle at 70% 30%,#00aaff08,transparent 40%);pointer-events:none}
+
+/* Pixel art krill */
+.krill-pixel{display:inline-grid;grid-template-columns:repeat(24,8px);gap:1px;margin-bottom:1rem;filter:drop-shadow(0 0 8px #00ff8840)}
+.krill-pixel span{width:8px;height:8px;border-radius:1px;display:block}
+
+.wizard-header h1{font-size:1.3rem;color:#00ff88;margin-bottom:0.25rem;position:relative}
+.wizard-header .tm{font-size:0.7rem;vertical-align:super}
+.wizard-header p{color:#555;font-size:0.75rem;position:relative}
+
+/* Progress bar */
+.progress{display:flex;gap:4px;padding:0 2rem;margin-top:1rem;position:relative}
+.progress-dot{flex:1;height:3px;background:#1a1a1a;border-radius:2px;transition:background 0.3s}
+.progress-dot.active{background:#00ff88}
+.progress-dot.done{background:#00ff8860}
+
+/* Steps */
+.wizard-body{padding:1.5rem 2rem 2rem}
+.step{display:none}
+.step.active{display:block}
+.step-title{color:#fff;font-size:1rem;font-weight:bold;margin-bottom:0.3rem}
+.step-desc{color:#666;font-size:0.8rem;margin-bottom:1.5rem;line-height:1.5}
+
+/* Input fields */
+.field{margin-bottom:1rem}
+.field label{display:block;color:#888;font-size:0.75rem;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em}
+.field input,.field select{width:100%;padding:0.7rem 0.8rem;background:#0a0a0a;border:1px solid #222;border-radius:8px;color:#fff;font-family:inherit;font-size:0.85rem;transition:border-color 0.2s}
+.field input:focus,.field select:focus{outline:none;border-color:#00ff88}
+optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}option{color:#fff;background:#0a0a0a;font-weight:normal}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.8rem center}
+.field .hint{color:#444;font-size:0.7rem;margin-top:0.3rem}
+
+/* Profile cards */
+.profiles{display:flex;flex-direction:column;gap:0.6rem}
+.profile-opt{padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:0.8rem}
+.profile-opt:hover{border-color:#00ff8880}
+.profile-opt.selected{border-color:#00ff88;background:#00ff8808}
+.profile-opt input{display:none}
+.profile-icon{font-size:1.3rem}
+.profile-info .name{color:#fff;font-size:0.85rem;font-weight:600}
+.profile-info .desc{color:#555;font-size:0.7rem;margin-top:0.1rem}
+
+/* Buttons */
+.btn-row{display:flex;gap:0.5rem;margin-top:1.5rem}
+.btn{flex:1;padding:0.7rem;border-radius:8px;font-family:inherit;font-size:0.85rem;font-weight:bold;cursor:pointer;transition:all 0.2s;text-align:center}
+.btn-primary{background:#00ff88;color:#0a0a0a;border:none}
+.btn-primary:hover{background:#00cc6a}
+.btn-primary:disabled{background:#333;color:#555;cursor:not-allowed}
+.btn-secondary{background:transparent;border:1px solid #333;color:#888}
+.btn-secondary:hover{border-color:#555;color:#aaa}
+
+/* Success state */
+.success-icon{font-size:3rem;margin-bottom:1rem}
+.success-msg{color:#00ff88;font-size:1.1rem;font-weight:bold;margin-bottom:0.5rem}
+.success-detail{color:#888;font-size:0.8rem;line-height:1.6}
+.terminal-output{background:#0a0a0a;border:1px solid #1a1a1a;border-radius:8px;padding:1rem;margin-top:1rem;font-size:0.75rem;color:#00ff88;line-height:1.6}
+.terminal-output .dim{color:#444}
+
+/* WiFi scanning animation */
+.scanning{display:flex;align-items:center;gap:0.5rem;color:#888;font-size:0.8rem;margin:1rem 0}
+.scanning .dots{display:inline-flex;gap:3px}
+.scanning .dots span{width:4px;height:4px;background:#00ff88;border-radius:50%;animation:pulse 1.4s ease-in-out infinite}
+.scanning .dots span:nth-child(2){animation-delay:0.2s}
+.scanning .dots span:nth-child(3){animation-delay:0.4s}
+@keyframes pulse{0%,100%{opacity:0.2}50%{opacity:1}}
+
+/* WiFi list */
+.wifi-list{display:flex;flex-direction:column;gap:0.4rem;max-height:150px;overflow-y:auto}
+.wifi-item{padding:0.6rem 0.8rem;background:#0a0a0a;border:1px solid #1a1a1a;border-radius:8px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:border-color 0.2s}
+.wifi-item:hover{border-color:#00ff88}
+.wifi-item.selected{border-color:#00ff88;background:#00ff8808}
+.wifi-name{color:#fff;font-size:0.85rem}
+.wifi-signal{color:#555;font-size:0.7rem}
+</style>
+</head>
+<body>
+
+<div class="wizard">
+<div class="wizard-header">
+<div class="krill-pixel" id="krill-art"></div>
+<h1>KrillClaw<span class="tm">™</span></h1>
+<p>Setup Wizard</p>
+<div class="progress">
+<div class="progress-dot active" id="dot0"></div>
+<div class="progress-dot" id="dot1"></div>
+<div class="progress-dot" id="dot2"></div>
+<div class="progress-dot" id="dot3"></div>
+<div class="progress-dot" id="dot4"></div>
+</div>
+</div>
+
+<div class="wizard-body">
+
+<!-- Step 0: Welcome -->
+<div class="step active" id="step0">
+<div class="step-title">Welcome 🦐</div>
+<div class="step-desc">Let's get your device connected and thinking. This takes about 2 minutes.</div>
+<div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:8px;padding:1rem;font-size:0.75rem;color:#555;line-height:1.6">
+<span style="color:#00ff88">Device:</span> ESP32-C3 (detected via BLE)<br>
+<span style="color:#00ff88">Firmware:</span> KrillClaw v0.1.0<br>
+<span style="color:#00ff88">Flash:</span> 4MB / 180KB used<br>
+<span style="color:#00ff88">Status:</span> <span style="color:#ff6600">No WiFi configured</span>
+</div>
+<div class="btn-row">
+<button class="btn btn-primary" onclick="goStep(1)">Let's go →</button>
+</div>
+</div>
+
+<!-- Step 1: WiFi -->
+<div class="step" id="step1">
+<div class="step-title">Connect to WiFi</div>
+<div class="step-desc">Your KrillClaw needs internet to reach LLM providers.</div>
+<div class="scanning" id="wifi-scan">
+<span>Scanning for networks</span>
+<div class="dots"><span></span><span></span><span></span></div>
+</div>
+<div class="wifi-list" id="wifi-list" style="display:none">
+<div class="wifi-item" onclick="selectWifi(this,'HomeNetwork-5G')">
+<span class="wifi-name">📶 HomeNetwork-5G</span>
+<span class="wifi-signal">-42 dBm</span>
+</div>
+<div class="wifi-item" onclick="selectWifi(this,'MEOSPOT-A3F2')">
+<span class="wifi-name">📶 MEOSPOT-A3F2</span>
+<span class="wifi-signal">-58 dBm</span>
+</div>
+<div class="wifi-item" onclick="selectWifi(this,'NOS-WiFi')">
+<span class="wifi-name">📶 NOS-WiFi</span>
+<span class="wifi-signal">-71 dBm</span>
+</div>
+</div>
+<div class="field" id="wifi-pass" style="display:none">
+<label>Password</label>
+<input type="password" placeholder="WiFi password" id="wifiPassInput">
+</div>
+<div class="btn-row">
+<button class="btn btn-secondary" onclick="goStep(0)">← Back</button>
+<button class="btn btn-primary" id="wifi-next" disabled onclick="goStep(2)">Connect →</button>
+</div>
+</div>
+
+<!-- Step 2: LLM Provider -->
+<div class="step" id="step2">
+<div class="step-title">Choose your LLM</div>
+<div class="step-desc">KrillClaw works with any OpenAI-compatible API.</div>
+<div class="field">
+<label>Provider</label>
+<select id="llm-provider" onchange="updateProviderUI()">
+<option value="">Select provider...</option>
+<optgroup label="☁️ Cloud Providers">
+<option value="openai">OpenAI — GPT-4o, GPT-4, o1, o3</option>
+<option value="anthropic">Anthropic — Claude 4 Opus, Claude 3.5 Sonnet, Claude 3 Haiku</option>
+<option value="google">Google Vertex AI — Gemini 2.5 Pro, Gemini 2.5 Flash</option>
+<option value="bedrock">Amazon Bedrock — Claude, Llama, Mistral via AWS</option>
+<option value="nvidia">NVIDIA NIM — NIM API inference</option>
+<option value="venice">Venice AI</option>
+</optgroup>
+<optgroup label="🇨🇳 Chinese Providers">
+<option value="moonshot">Moonshot / Kimi — Moonshot v1, Kimi</option>
+<option value="minimax">MiniMax — abab models</option>
+<option value="glm">GLM / Zhipu AI — GLM-4, GLM-5</option>
+<option value="qwen">Qwen / Alibaba — Qwen 2.5, Qwen-Max</option>
+<option value="qianfan">Qianfan / Baidu — ERNIE</option>
+<option value="xiaomi">Xiaomi — MiLM</option>
+</optgroup>
+<optgroup label="🏠 Local / Self-Hosted">
+<option value="ollama">Ollama — Llama 3, Mistral, Phi-3, CodeLlama (local)</option>
+<option value="vllm">vLLM — self-hosted inference</option>
+</optgroup>
+<optgroup label="🔀 Aggregators & Gateways">
+<option value="openrouter">OpenRouter — 100+ models</option>
+<option value="litellm">LiteLLM — universal proxy</option>
+<option value="together">Together AI</option>
+<option value="huggingface">Hugging Face Inference</option>
+<option value="copilot">GitHub Copilot</option>
+<option value="cloudflare">Cloudflare AI Gateway</option>
+<option value="vercel">Vercel AI Gateway</option>
+<option value="zai">ZAI</option>
+</optgroup>
+<optgroup label="⚙️ Custom">
+<option value="custom">Any OpenAI-compatible endpoint (custom URL)</option>
+</optgroup>
+</select>
+</div>
+<div class="field" id="api-key-field" style="display:none">
+<label>API Key</label>
+<input type="password" placeholder="sk-..." id="apiKeyInput">
+<div class="hint">Stored encrypted on-device. Never leaves your chip.</div>
+</div>
+<div class="field" id="endpoint-field" style="display:none">
+<label>Endpoint URL</label>
+<input type="text" placeholder="http://192.168.1.100:11434/v1" id="endpointInput">
+</div>
+<div class="btn-row">
+<button class="btn btn-secondary" onclick="goStep(1)">← Back</button>
+<button class="btn btn-primary" onclick="goStep(3)">Next →</button>
+</div>
+</div>
+
+<!-- Step 3: Profile -->
+<div class="step" id="step3">
+<div class="step-title">Pick your profile</div>
+<div class="step-desc">Each profile ships different tools. You can change this later.</div>
+<div class="profiles">
+<label class="profile-opt" onclick="selectProfile(this)">
+<input type="radio" name="profile" value="coding">
+<div class="profile-icon">💻</div>
+<div class="profile-info">
+<div class="name">Coding</div>
+<div class="desc">bash, file read/write/edit, search, apply_patch</div>
+</div>
+</label>
+<label class="profile-opt" onclick="selectProfile(this)">
+<input type="radio" name="profile" value="iot">
+<div class="profile-icon">🌡️</div>
+<div class="profile-info">
+<div class="name">IoT</div>
+<div class="desc">MQTT, HTTP requests, key-value store, sensors</div>
+</div>
+</label>
+<label class="profile-opt" onclick="selectProfile(this)">
+<input type="radio" name="profile" value="robotics">
+<div class="profile-icon">🤖</div>
+<div class="profile-info">
+<div class="name">Robotics</div>
+<div class="desc">motor control, e-stop, telemetry, bounds checking</div>
+</div>
+</label>
+</div>
+<div class="btn-row">
+<button class="btn btn-secondary" onclick="goStep(2)">← Back</button>
+<button class="btn btn-primary" id="profile-next" disabled onclick="goStep(4)">Finish setup →</button>
+</div>
+</div>
+
+<!-- Step 4: Done -->
+<div class="step" id="step4">
+<div style="text-align:center">
+<div class="success-icon">🦐</div>
+<div class="success-msg">You're live!</div>
+<div class="success-detail">KrillClaw is connected and thinking.</div>
+</div>
+<div class="terminal-output">
+<span class="dim">$</span> krillclaw status<br>
+<span style="color:#00ff88">●</span> WiFi: HomeNetwork-5G <span class="dim">(connected)</span><br>
+<span style="color:#00ff88">●</span> LLM: Anthropic Claude <span class="dim">(200 OK)</span><br>
+<span style="color:#00ff88">●</span> Profile: IoT <span class="dim">(5 tools loaded)</span><br>
+<span style="color:#00ff88">●</span> Memory: 3.8MB free <span class="dim">(SOUL.md initialized)</span><br>
+<span style="color:#00ff88">●</span> Uptime: 4s<br><br>
+<span class="dim">Ready. Try:</span> "read the temperature sensor"
+</div>
+<div class="btn-row">
+<button class="btn btn-primary" onclick="alert('Would open chat interface')">Start chatting →</button>
+</div>
+</div>
+
+</div>
+</div>
+
+<script>
+// Pixel art krill - 24x14 grid, much more detailed
+// Colors: 0=transparent, g=#00ff88, G=#00cc66, o=#ff6600, O=#cc5500, b=#00aaff, B=#0088cc, w=#ffffff, d=#006644
+(function(){
+var rows=[
+  '000000000000gggg00000000',
+  '0000000000ggGGGGgg000000',
+  '000000000gGwwGGGooog0000',
+  '00000000gGGGGGGGGooGg000',
+  '0000000gGoGGGGGGGGGGgb00',
+  '000000gGGGggggggGGGGgbb0',
+  '00000gGGgg0000ooggGgbb00',
+  '0000gGGg0000000gggbb000b',
+  '00000gGgg00000ggb0000b00',
+  '000000ggGGggggG000000000',
+  '00000000gGgGgGg000000000',
+  '0000000gG0gG0gG00000000',
+  '000000gG00gG00gG0000000',
+  '00000g0000g0000g00000000',
+];
+var colors={g:'#00ff88',G:'#00cc66',o:'#ff6600',O:'#cc5500',b:'#00aaff',B:'#0088cc',w:'#ffffff',d:'#006644'};
+var el=document.getElementById('krill-art');
+for(var r=0;r<rows.length;r++){
+  for(var c=0;c<24;c++){
+    var px=document.createElement('span');
+    var ch=rows[r][c]||'0';
+    px.style.background=colors[ch]||'transparent';
+    el.appendChild(px);
+  }
+}
+})();
+
+function goStep(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  for(var i=0;i<5;i++){
+    var d=document.getElementById('dot'+i);
+    d.classList.remove('active','done');
+    if(i<n)d.classList.add('done');
+    if(i===n)d.classList.add('active');
+  }
+  if(n===1){
+    document.getElementById('wifi-scan').style.display='flex';
+    document.getElementById('wifi-list').style.display='none';
+    document.getElementById('wifi-pass').style.display='none';
+    setTimeout(function(){
+      document.getElementById('wifi-scan').style.display='none';
+      document.getElementById('wifi-list').style.display='flex';
+    },1500);
+  }
+}
+function selectWifi(el,name){
+  document.querySelectorAll('.wifi-item').forEach(w=>w.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('wifi-pass').style.display='block';
+  document.getElementById('wifi-next').disabled=false;
+  document.getElementById('wifiPassInput').focus();
+}
+function updateProviderUI(){
+  var v=document.getElementById('llm-provider').value;
+  var selfHosted=['ollama','vllm'];
+  var needsEndpoint=['ollama','vllm','litellm','custom','bedrock','cloudflare','vercel'];
+  document.getElementById('api-key-field').style.display=(v&&selfHosted.indexOf(v)===-1)?'block':'none';
+  document.getElementById('endpoint-field').style.display=(needsEndpoint.indexOf(v)!==-1)?'block':'none';
+}
+function selectProfile(el){
+  document.querySelectorAll('.profile-opt').forEach(p=>p.classList.remove('selected'));
+  el.classList.add('selected');
+  el.querySelector('input').checked=true;
+  document.getElementById('profile-next').disabled=false;
+}
+</script>
+</body>
+</html>
