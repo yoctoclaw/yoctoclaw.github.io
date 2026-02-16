@@ -523,24 +523,32 @@ zig build -Doptimize=ReleaseSmall
 <div class="section">
 <h2>FAQ</h2>
 <details class="faq-item">
-<summary>Does it need internet?</summary>
-<div class="faq-answer">Yes, for LLM calls — the intelligence comes from cloud providers. Works offline for local actions (sensor reads, GPIO, scheduled tasks). Reconnects automatically when WiFi returns.</div>
+<summary>Does it need WiFi?</summary>
+<div class="faq-answer"><strong>Spoke (180KB):</strong> No. Connects via BLE or serial to a hub (your phone, a Pi, or another KrillClaw node). The hub handles internet access. Your device never needs WiFi credentials or API keys.<br><strong>Hub (≤500KB):</strong> Yes. Connects directly to LLM APIs over WiFi/HTTP. Self-contained, no phone needed.</div>
+</details>
+<details class="faq-item">
+<summary>What's the difference between Spoke and Hub?</summary>
+<div class="faq-answer"><strong>Spoke</strong> is a 180KB BLE/serial agent that runs on a $3 chip — sensors, actuators, local logic, ReAct reasoning. It talks to a hub for LLM calls. No WiFi, no API keys on device, ultra-low power (~10mA).<br><strong>Hub</strong> is a ≤500KB full agent with built-in HTTP/TLS. Runs on ESP32-S3, Raspberry Pi, or any Linux board. Talks directly to any LLM provider. Can also coordinate multiple spokes.</div>
 </details>
 <details class="faq-item">
 <summary>How much does the API cost?</summary>
-<div class="faq-answer">Typical usage: $0.50–2/month. You bring your own API key and control the budget. KrillClaw itself is free and open source.</div>
+<div class="faq-answer">Typical usage: $0.50–2/month. You bring your own API key (on the hub or phone) and control the budget. KrillClaw itself is free and open source.</div>
 </details>
 <details class="faq-item">
-<summary>What happens when WiFi drops?</summary>
-<div class="faq-answer">Queues actions, retries with exponential backoff, resumes seamlessly when connectivity returns. Local operations continue uninterrupted.</div>
+<summary>What happens when connectivity drops?</summary>
+<div class="faq-answer"><strong>Spoke:</strong> Continues local operations (sensor reads, GPIO, scheduled tasks). Queues messages for the hub and syncs when BLE reconnects.<br><strong>Hub:</strong> Queues LLM calls, retries with exponential backoff, resumes seamlessly when WiFi returns. Local operations are uninterrupted.</div>
 </details>
 <details class="faq-item">
 <summary>Can I use it without an ESP32?</summary>
-<div class="faq-answer">Yes — runs on any Linux ARM/RISC-V board, Raspberry Pi, routers, anything with 2MB RAM. ESP32 is the smallest target, not the only one.</div>
+<div class="faq-answer">Yes — the hub profile runs on any Linux ARM/RISC-V board, Raspberry Pi, routers, anything with 2MB RAM. ESP32 is the smallest target, not the only one.</div>
 </details>
 <details class="faq-item">
 <summary>Is it really 180KB?</summary>
-<div class="faq-answer">Yes. Zig + zero dependencies + no OS = smallest AI agent runtime ever built. The entire binary fits in the boot sector of a floppy disk.</div>
+<div class="faq-answer">The spoke profile is 180KB — BLE/serial transport, no HTTP stack, no TLS. That's the real binary for real embedded use. The hub profile is ≤500KB because it includes HTTP/TLS for direct LLM API calls. Both are smaller than any competitor.</div>
+</details>
+<details class="faq-item">
+<summary>Which profile should I use?</summary>
+<div class="faq-answer"><strong>Use spoke</strong> when: your device is near a phone or hub, you want the smallest binary, you don't want API keys on the device, or you're optimizing for power.<br><strong>Use hub</strong> when: your device needs to work autonomously with no phone nearby, or it's coordinating other spokes.</div>
 </details>
 </div>
 
