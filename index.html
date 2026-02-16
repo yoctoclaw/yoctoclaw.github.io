@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YoctoClaw — The World's Smallest Coding Agent</title>
+<title>YoctoClaw — The World's Smallest Coding Agent (180KB, Zero Dependencies)</title>
+<meta name="description" content="YoctoClaw is a full coding agent in ~3,500 lines of Zig. 180KB binary. Zero dependencies. Runs on a $3 ESP32 or smart ring. Works with Claude, OpenAI, and Ollama.">
+<meta name="keywords" content="coding agent, Zig, AI, LLM, embedded, IoT, Claude, OpenAI, Ollama, BLE, minimal, lightweight, zero dependencies">
+<meta property="og:title" content="YoctoClaw — The World's Smallest Coding Agent">
+<meta property="og:description" content="Full coding agent in 180KB. Zero dependencies. Runs on embedded devices. ~3,500 lines of Zig.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yoctoclaw.github.io">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="YoctoClaw — 180KB Coding Agent">
+<meta name="twitter:description" content="Full coding agent in ~3,500 lines of Zig. Works with Claude, OpenAI, Ollama. Runs on a $3 chip.">
+<link rel="canonical" href="https://yoctoclaw.github.io">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Fira Code',monospace;line-height:1.6}
@@ -81,13 +91,22 @@ context.zig  — token management (225 lines)</pre>
 </div>
 
 <div class="section">
+<h2>Three profiles, one codebase</h2>
+<p style="color:#888;margin-bottom:1.5rem">Compile-time profiles swap entire tool sets. Only the selected profile ships — zero runtime overhead.</p>
+<pre class="install" style="max-width:650px;font-size:0.9rem"><span style="color:#00ff88">coding</span>     — bash, read/write/edit files, search, list, apply_patch
+<span style="color:#00ff88">iot</span>        — MQTT pub/sub, HTTP requests, key-value store
+<span style="color:#00ff88">robotics</span>   — robot commands, e-stop, telemetry, bounds checking</pre>
+<p style="color:#888;margin-top:1rem">Build with <code style="color:#00ff88">-Dprofile=iot</code> or <code style="color:#00ff88">-Dsandbox=true</code> for restricted execution.</p>
+</div>
+
+<div class="section">
 <h2>Runs on a $3 chip</h2>
 <p style="color:#888;margin-bottom:1.5rem">BLE and serial transport built in. Your phone bridges it to Claude.</p>
 <div class="hardware">
 <div class="hw-card"><div class="price">$3</div><div class="name">ESP32-C3</div><div style="color:#555">RISC-V, BLE 5.0</div></div>
 <div class="hw-card"><div class="price">$6</div><div class="name">Raspberry Pi Pico</div><div style="color:#555">RP2040, Serial</div></div>
 <div class="hw-card"><div class="price">$20</div><div class="name">Colmi R02 Ring</div><div style="color:#555">BLE, wearable agent</div></div>
-<div class="hw-card"><div class="price">$30</div><div class="name">nRF5340 DK</div><div style="color:#555">BLE 5.3, dual-core</div></div>
+<div class="hw-card"><div class="price">$50</div><div class="name">nRF5340 DK</div><div style="color:#555">BLE 5.3, dual-core</div></div>
 </div>
 </div>
 
@@ -107,6 +126,25 @@ zig build -Doptimize=ReleaseSmall
 <footer>
 Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · <a href="https://github.com/yoctoclaw/TinyDancer">Source</a>
 </footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "YoctoClaw",
+  "description": "The world's smallest coding agent. Full autonomous AI agent in 180KB with zero dependencies. Written in Zig.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Linux, macOS, Embedded",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "programmingLanguage": "Zig",
+  "codeRepository": "https://github.com/yoctoclaw/TinyDancer",
+  "license": "https://opensource.org/licenses/MIT"
+}
+</script>
 
 </body>
 </html>
