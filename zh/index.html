@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrillClaw™ — 最小的边缘AI智能体运行时</title>
+    <meta name="description" content="KrillClaw™ 是用于边缘设备的最小AI智能体运行时。180KB、零依赖、运行在3美元的ESP32上。用Zig编写。">
+    <meta property="og:title" content="KrillClaw™ — 最小的边缘AI智能体运行时">
+    <meta property="og:description" content="KrillClaw™ 是用于边缘设备的最小AI智能体运行时。180KB、零依赖、运行在3美元的ESP32上。用Zig编写。">
+    <meta property="og:image" content="https://yoctoclaw.github.io/og-image.png">
+    <meta property="og:url" content="https://yoctoclaw.github.io/zh/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦐</text></svg>">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #ffffff;
+            --accent: #00ff88;
+            --gray: #666666;
+            --dark-gray: #1a1a1a;
+            --hover: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .lang-switcher a {
+            background: var(--dark-gray);
+            color: var(--text);
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            border: 1px solid var(--hover);
+            transition: all 0.3s ease;
+        }
+        
+        .lang-switcher a:hover {
+            background: var(--hover);
+            border-color: var(--accent);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        .hero .specs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .spec {
+            background: var(--dark-gray);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--hover);
+        }
+        
+        .spec-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .spec-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .device-carousel {
+            width: 100%;
+            max-width: 1200px;
+            margin: 3rem auto;
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+        
+        .device-track {
+            display: flex;
+            animation: scroll 60s linear infinite;
+        }
+        
+        .device-item {
+            background: var(--dark-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin-right: 1rem;
+            white-space: nowrap;
+            border: 1px solid var(--hover);
+            min-width: max-content;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+            border-color: var(--accent);
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--gray);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .comparison-table {
+            background: var(--dark-gray);
+            border-radius: 16px;
+            overflow: hidden;
+            margin: 3rem 0;
+        }
+        
+        .comparison-header {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--dark-gray), var(--hover));
+        }
+        
+        .table-container {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--hover);
+        }
+        
+        th {
+            background: var(--hover);
+            font-weight: 600;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .provider-marquee {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+            overflow: hidden;
+        }
+        
+        .provider-track {
+            display: flex;
+            animation: scrollProviders 30s linear infinite;
+        }
+        
+        .provider-item {
+            margin-right: 2rem;
+            white-space: nowrap;
+            color: var(--gray);
+        }
+        
+        @keyframes scrollProviders {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .use-case {
+            background: var(--dark-gray);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--hover);
+            transition: all 0.3s ease;
+        }
+        
+        .use-case:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+        
+        .use-case-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--hover), var(--dark-gray));
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .use-case-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .use-case-content {
+            padding: 1.5rem;
+            display: none;
+        }
+        
+        .use-case.expanded .use-case-content {
+            display: block;
+        }
+        
+        .retrofit-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .retrofit-item {
+            background: var(--dark-gray);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--hover);
+        }
+        
+        .retrofit-savings {
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1rem;
+        }
+        
+        .hardware-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+        
+        .hardware-item {
+            background: var(--dark-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--hover);
+            transition: all 0.3s ease;
+        }
+        
+        .hardware-item:hover {
+            border-color: var(--accent);
+        }
+        
+        .hardware-price {
+            font-size: 2rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .hardware-name {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+        }
+        
+        .hardware-spec {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .waitlist-form {
+            background: var(--dark-gray);
+            padding: 3rem;
+            border-radius: 16px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .waitlist-step {
+            display: none;
+        }
+        
+        .waitlist-step.active {
+            display: block;
+        }
+        
+        .use-case-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .use-case-option {
+            background: var(--hover);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .use-case-option:hover,
+        .use-case-option.selected {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.1);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 2px solid var(--hover);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--hover);
+            margin-top: 5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .specs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <a href="/">EN</a>
+    </div>
+
+    <section class="hero">
+        <h1>每个设备都有AI大脑。</h1>
+        <p class="tagline">KrillClaw™ — 最小的边缘设备AI智能体运行时。</p>
+        
+        <div class="specs">
+            <div class="spec">
+                <div class="spec-number">180KB</div>
+                <div class="spec-label">二进制大小</div>
+            </div>
+            <div class="spec">
+                <div class="spec-number">0</div>
+                <div class="spec-label">依赖项</div>
+            </div>
+            <div class="spec">
+                <div class="spec-number">$3</div>
+                <div class="spec-label">最低硬件成本</div>
+            </div>
+        </div>
+        
+        <p style="margin-bottom: 2rem; color: var(--gray);">零依赖 · 无需操作系统 · 任何LLM提供商</p>
+        <p style="margin-bottom: 3rem; color: var(--gray);">运行在3美元的ESP32上。用Zig编写。</p>
+        
+        <div class="device-carousel">
+            <div class="device-track">
+                <div class="device-item">智能戒指</div>
+                <div class="device-item">ESP32-C3</div>
+                <div class="device-item">Raspberry Pi</div>
+                <div class="device-item">Arduino Nano</div>
+                <div class="device-item">Steam Deck</div>
+                <div class="device-item">旧笔记本</div>
+                <div class="device-item">智能手表</div>
+                <div class="device-item">USB设备</div>
+                <div class="device-item">汽车ECU</div>
+                <div class="device-item">无人机大脑</div>
+                <div class="device-item">气象站</div>
+                <div class="device-item">3D打印机</div>
+                <div class="device-item">CNC机床</div>
+                <div class="device-item">机械臂</div>
+                <div class="device-item">智能锁</div>
+                <div class="device-item">车库门</div>
+                <div class="device-item">鱼缸</div>
+                <div class="device-item">植物监测器</div>
+                <div class="device-item">土壤传感器</div>
+                <div class="device-item">婴儿监视器</div>
+                <div class="device-item">门铃摄像头</div>
+                <div class="device-item">太阳能板</div>
+                <div class="device-item">风力发电机</div>
+                <div class="device-item">卫星调制解调器</div>
+                <div class="device-item">探测器</div>
+                <div class="device-item">火星探测车</div>
+                <div class="device-item">工业传感器</div>
+                <div class="device-item">导航计算机</div>
+                <div class="device-item">飞行控制器</div>
+                <div class="device-item">交通信号灯</div>
+                <div class="device-item">停车咪表</div>
+                <div class="device-item">自动售货机</div>
+                <div class="device-item">POS系统</div>
+                <!-- Repeat for continuous scroll -->
+                <div class="device-item">智能戒指</div>
+                <div class="device-item">ESP32-C3</div>
+                <div class="device-item">Raspberry Pi</div>
+                <div class="device-item">Arduino Nano</div>
+                <div class="device-item">Steam Deck</div>
+                <div class="device-item">旧笔记本</div>
+                <div class="device-item">智能手表</div>
+                <div class="device-item">USB设备</div>
+                <div class="device-item">汽车ECU</div>
+                <div class="device-item">无人机大脑</div>
+            </div>
+        </div>
+        
+        <div style="background: var(--dark-gray); padding: 2rem; border-radius: 12px; margin: 2rem 0; font-family: monospace;">
+            <div>zig build -Doptimize=ReleaseSmall</div>
+            <div>export ANTHROPIC_API_KEY=...</div>
+            <div>./krillclaw "修复这个错误"</div>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">★ 在GitHub上点星</a>
+            <a href="#" class="btn btn-secondary">查看源码</a>
+            <a href="#waitlist" class="btn btn-primary">🦐 我想要一个！</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="comparison-table">
+            <div class="comparison-header">
+                <h2>对比分析</h2>
+                <p>嵌入式AI智能体运行时 — 一个新的类别。</p>
+            </div>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th><span class="highlight">KrillClaw™</span></th>
+                            <th>MimiClaw</th>
+                            <th>PicoClaw</th>
+                            <th>OpenClaw</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>编程语言</td>
+                            <td><span class="highlight">Zig</span></td>
+                            <td>C</td>
+                            <td>Go</td>
+                            <td>Node.js</td>
+                        </tr>
+                        <tr>
+                            <td>二进制大小</td>
+                            <td><span class="highlight">180 KB</span></td>
+                            <td>~2 MB</td>
+                            <td>~8 MB</td>
+                            <td>~200 MB</td>
+                        </tr>
+                        <tr>
+                            <td>RAM使用</td>
+                            <td><span class="highlight">2 MB</span></td>
+                            <td>~512 KB*</td>
+                            <td>~10 MB</td>
+                            <td>~200 MB</td>
+                        </tr>
+                        <tr>
+                            <td>源码行数</td>
+                            <td><span class="highlight">~3,500 LOC</span></td>
+                            <td>~7K LOC</td>
+                            <td>?</td>
+                            <td>~40K LOC</td>
+                        </tr>
+                        <tr>
+                            <td>依赖项</td>
+                            <td><span class="highlight">0</span></td>
+                            <td>ESP-IDF</td>
+                            <td>Go stdlib</td>
+                            <td>~108 npm</td>
+                        </tr>
+                        <tr>
+                            <td>目标硬件</td>
+                            <td><span class="highlight">$3 ESP32+</span></td>
+                            <td>$5 ESP32-S3</td>
+                            <td>$10 LicheeRV</td>
+                            <td>Pi / VPS / Mac</td>
+                        </tr>
+                        <tr>
+                            <td>需要操作系统？</td>
+                            <td><span class="highlight">否</span></td>
+                            <td>否</td>
+                            <td>Linux</td>
+                            <td>Linux / macOS</td>
+                        </tr>
+                        <tr>
+                            <td>内存安全</td>
+                            <td><span class="highlight">是 (Zig)</span></td>
+                            <td>否 (C)</td>
+                            <td>是 (Go GC)</td>
+                            <td>是 (JS)</td>
+                        </tr>
+                        <tr>
+                            <td>LLM提供商</td>
+                            <td><span class="highlight">任何兼容的</span></td>
+                            <td>Claude + OpenAI</td>
+                            <td>?</td>
+                            <td>多个</td>
+                        </tr>
+                        <tr>
+                            <td>BLE传输</td>
+                            <td><span class="highlight">是</span></td>
+                            <td>否</td>
+                            <td>否</td>
+                            <td>否</td>
+                        </tr>
+                        <tr>
+                            <td>许可证</td>
+                            <td>MIT</td>
+                            <td>MIT</td>
+                            <td>MIT</td>
+                            <td>MIT</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="provider-marquee">
+            <p style="text-align: center; margin-bottom: 1rem; font-weight: 600;">兼容任何OpenAI格式的提供商</p>
+            <div class="provider-track">
+                <div class="provider-item">OpenAI</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Anthropic</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Ollama</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Mistral</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Groq</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">DeepSeek</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">OpenRouter</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Azure</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">AWS Bedrock</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Google Vertex</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Cerebras</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Cohere</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">SiliconFlow</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">Hugging Face</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">DeepInfra</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">LiteLLM</div>
+                <div class="provider-item">·</div>
+                <div class="provider-item">vLLM</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>16个文件。~3,500行代码。就这么多。</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">你可以在一小时内读完整个代码库。</p>
+        
+        <div style="background: var(--dark-gray); padding: 2rem; border-radius: 12px; font-family: monospace;">
+            <div style="margin-bottom: 1rem;"><strong>agent.zig</strong> — 核心循环 (250行)</div>
+            <div style="margin-bottom: 1rem;"><strong>api.zig</strong> — 多提供商HTTP (329行)</div>
+            <div style="margin-bottom: 1rem;"><strong>stream.zig</strong> — SSE解析器 (344行)</div>
+            <div style="margin-bottom: 1rem;"><strong>json.zig</strong> — 手工JSON解析 (500行)</div>
+            <div style="margin-bottom: 1rem;"><strong>tools_coding.zig</strong> — 7个工具 (280行)</div>
+            <div style="margin-bottom: 1rem;"><strong>context.zig</strong> — 令牌管理 (225行)</div>
+        </div>
+        
+        <p style="text-align: center; color: var(--gray); margin-top: 2rem;">兼容任何OpenAI格式的LLM。用标志切换提供商。</p>
+    </section>
+
+    <section class="section">
+        <h2>能实现什么</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">当每个设备都有AI大脑和WiFi时，普通的东西变得非凡。</p>
+        
+        <div class="use-cases">
+            <div class="use-case">
+                <div class="use-case-header" onclick="toggleUseCase(this)">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏠</div>
+                        <div class="use-case-title">智能家居：你的冰箱管理杂货</div>
+                    </div>
+                    <div>▼</div>
+                </div>
+                <div class="use-case-content">
+                    <p>一个3美元的ESP32在你的冰箱内部监控消费情况。它注意到你的燕麦奶快用完了，检查你的Instacart历史，然后在WhatsApp上提醒你："你上周试过那款新的希腊酸奶但没有再订 — 想回到平常的Fage，还是再试一次？"它随时间学习你的偏好。无需应用程序。无需屏幕。只是一个会关注的芯片。</p>
+                </div>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-header" onclick="toggleUseCase(this)">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏠</div>
+                        <div class="use-case-title">智能家居：看到你来了的车库门</div>
+                    </div>
+                    <div>▼</div>
+                </div>
+                <div class="use-case-content">
+                    <p>你满手拿着杂货袋走回家。车库上的KrillClaw通过安防摄像头监控房屋周围。它看到你满手拿着东西走近，识别出是你，理解情况，然后在你走近时开启车库门 — 这样你就不必费劲地找遥控器了。</p>
+                </div>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-header" onclick="toggleUseCase(this)">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌱</div>
+                        <div class="use-case-title">IoT与农业：自主农业的温室</div>
+                    </div>
+                    <div>▼</div>
+                </div>
+                <div class="use-case-content">
+                    <p>温室内的ESP32节点网络 — 土壤湿度、pH值、光照、CO₂、温度传感器。智能体推理植物健康状况，调节灌溉阀门，控制生长灯，开关通风口。完全自主的农业。你的植物得到的照顾比大多数人照顾宠物还好。</p>
+                </div>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-header" onclick="toggleUseCase(this)">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🏭</div>
+                        <div class="use-case-title">工业：工厂CNC预测性维护</div>
+                    </div>
+                    <div>▼</div>
+                </div>
+                <div class="use-case-content">
+                    <p>ESP32-S3配备振动/温度传感器，夹在CNC机床上。智能体学习正常操作模式，检测异常，在故障发生前几天预测轴承故障。"3号机床需要在48小时内更换轴承。"用5美元的传感器防止5万美元的停机损失。</p>
+                </div>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-header" onclick="toggleUseCase(this)">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤖</div>
+                        <div class="use-case-title">机器人：下载灵巧技能的仿生手</div>
+                    </div>
+                    <div>▼</div>
+                </div>
+                <div class="use-case-content">
+                    <p>假肢手中的nRF5340。智能体控制12个伺服电机进行手指关节运动。下载运动模式：筷子使用 → 纸牌技巧 → 战地手术。每个技能都是一个工具配置文件。手部随时间推移在复杂任务上变得更好，从使用模式中学习。</p>
+                </div>
+            </div>
+            
+            <div class="use-case">
+                <div class="use-case-header" onclick="toggleUseCase(this)">
+                    <div>
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤖</div>
+                        <div class="use-case-title">机器人：修复自身故障的3D打印机</div>
+                    </div>
+                    <div>▼</div>
+                </div>
+                <div class="use-case-content">
+                    <p>Pi Pico W配备摄像头监控打印床。智能体检测打印失败，暂停作业，分析故障模式（翘边、拉丝、层间粘合），调整温度/速度/风扇设置，恢复打印。或者给你发邮件诊断："打印因床面粘合失败。建议将床面温度提高到65°C。"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>改装任何设备。未来保障一切。</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">你已经拥有了令人难以置信的硬件。内部的电子设备只是从未有过大脑。一个3美元的KrillClaw芯片和WiFi连接为任何设备带来世界上最强大的AI模型 — 分析数据、实时反应、主动行动、运行重复操作。无需更换。</p>
+        
+        <div style="text-align: center; font-size: 1.5rem; color: var(--accent); margin-bottom: 3rem; font-weight: 600;">
+            升级大脑，而不是机器。
+        </div>
+        
+        <div class="retrofit-grid">
+            <div class="retrofit-item">
+                <h3>🚗 汽车</h3>
+                <h4>你的2018年汽车变成2026年汽车</h4>
+                <p>你的汽车OBD-II端口会说数据 — 但汽车自己的计算机在出厂那天就冻结了时间。插入一个3美元的ESP32配KrillClaw。现在它读取引擎代码，与维修数据库交叉引用，监控燃油效率趋势，并给你发短信："你这个月的燃油经济性下降了8% — 根据里程数可能是空气过滤器。12美元的零件，5分钟更换。要我订购一个吗？"</p>
+                <div class="retrofit-savings">节省$44,997 (99.9%)</div>
+            </div>
+            
+            <div class="retrofit-item">
+                <h3>🏋️ 健身</h3>
+                <h4>你的健身车获得真正的教练</h4>
+                <p>你的健身车有踏频、阻力和心率传感器 — 但其软件是制造商出厂时的版本。夹一个KrillClaw节点到上面。现在它读取你的实时表现，与你的训练历史比较，并根据情况调整指导："你的功率输出比周二下降了15% — 你可能恢复不足。今天切换到耐力区域骑行而不是间歇训练。"</p>
+                <div class="retrofit-savings">节省$2,997 (99.9%)</div>
+            </div>
+            
+            <div class="retrofit-item">
+                <h3>🏭 工业</h3>
+                <h4>5万美元CNC机床用3美元获得预测性维护</h4>
+                <p>你的CNC机床花费5万美元，但控制器是2015年的。工业预测性维护平台每年花费2万美元。将KrillClaw芯片连接到振动传感器和主轴温度探头。它建立基线，检测异常，与闪存中的维护日志关联，在故障前向车间主管发消息。</p>
+                <div class="retrofit-savings">节省$29,997 (99.99%)</div>
+            </div>
+            
+            <div class="retrofit-item">
+                <h3>🏠 家庭</h3>
+                <h4>你的"愚蠢"家电变得真正智能</h4>
+                <p>你的洗衣机、烘干机、泳池泵、HVAC、热水器 — 都有传感器和控制接口。它们都不互相交流或为自己思考。每个设备上一个KrillClaw芯片，连接到你的家庭WiFi，突然你的房子有了神经系统。</p>
+                <div class="retrofit-savings">节省$14,980 (99.9%)</div>
+            </div>
+        </div>
+        
+        <p style="text-align: center; color: var(--accent); font-size: 1.2rem; margin-top: 3rem;">
+            你拥有的每个设备都可以升级。不需要更换。
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>运行在3美元芯片上</h2>
+        <p style="text-align: center; color: var(--gray); margin-bottom: 3rem;">内置WiFi、BLE和串行。通过无线连接任何LLM。</p>
+        
+        <div class="hardware-grid">
+            <div class="hardware-item">
+                <div class="hardware-price">$3</div>
+                <div class="hardware-name">ESP32-C3</div>
+                <div class="hardware-spec">RISC-V, BLE 5.0</div>
+                <div style="background: var(--accent); color: var(--bg); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-top: 0.5rem;">编程</div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-price">$6</div>
+                <div class="hardware-name">Raspberry Pi Pico</div>
+                <div class="hardware-spec">RP2040, 串行</div>
+                <div style="background: var(--accent); color: var(--bg); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-top: 0.5rem;">编程</div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-price">$8</div>
+                <div class="hardware-name">Milk-V Duo</div>
+                <div class="hardware-spec">RISC-V, Linux</div>
+                <div style="background: var(--accent); color: var(--bg); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-top: 0.5rem;">编程</div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-price">$20</div>
+                <div class="hardware-name">Colmi R02戒指</div>
+                <div class="hardware-spec">BLE, 目标平台</div>
+                <div style="background: var(--accent); color: var(--bg); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-top: 0.5rem;">编程</div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-price">$3</div>
+                <div class="hardware-name">ESP32-C3</div>
+                <div class="hardware-spec">WiFi + BLE传感器集线器</div>
+                <div style="background: #00ccff; color: var(--bg); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-top: 0.5rem;">物联网</div>
+            </div>
+            
+            <div class="hardware-item">
+                <div class="hardware-price">$6</div>
+                <div class="hardware-name">Pi Pico + 电机</div>
+                <div class="hardware-spec">伺服控制, PWM</div>
+                <div style="background: #ff6600; color: var(--bg); padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem; margin-top: 0.5rem;">机器人</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="waitlist" class="section">
+        <div class="waitlist-form">
+            <h2>🦐 我想要一个！</h2>
+            <p>注册获取预刷KrillClaw™设备。</p>
+            <p style="color: var(--gray); margin-bottom: 2rem;">无垃圾邮件。只在硬件发货时提醒一下。</p>
+            
+            <div class="waitlist-step active" id="step1">
+                <h3>你想构建什么？</h3>
+                <p style="color: var(--gray); margin-bottom: 2rem;">选择最让你兴奋的。帮助我们确定首先发货什么。</p>
+                
+                <div class="use-case-options">
+                    <div class="use-case-option" onclick="selectUseCase(this, 'tinker')">
+                        🔧 我想折腾，看看有什么可能
+                    </div>
+                    <div class="use-case-option" onclick="selectUseCase(this, 'education')">
+                        👨‍👧 我想教我的孩子如何为家里的东西添加AI
+                    </div>
+                    <div class="use-case-option" onclick="selectUseCase(this, 'retrofit')">
+                        🔄 我想为现有硬件提供未来保障
+                    </div>
+                    <div class="use-case-option" onclick="selectUseCase(this, 'fleet')">
+                        🏭 我想在廉价硬件上构建大规模AI智能体群
+                    </div>
+                    <div class="use-case-option" onclick="selectUseCase(this, 'other')">
+                        ✨ 完全其他的东西
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="nextStep()" disabled id="nextBtn">下一步</button>
+            </div>
+            
+            <div class="waitlist-step" id="step2">
+                <h3>太好了！我们会优先考虑。</h3>
+                <input type="email" class="form-input" placeholder="你的邮箱地址" id="emailInput" required>
+                <button class="btn btn-primary" onclick="submitWaitlist()">加入等待列表</button>
+            </div>
+            
+            <div class="waitlist-step" id="step3">
+                <h3>🎉 你已加入！</h3>
+                <p>感谢注册。我们会在有消息时联系你。</p>
+                <p style="color: var(--gray);">同时，在GitHub上关注开发进展。</p>
+                <a href="#" class="btn btn-secondary">★ 在GitHub上关注</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>开始使用GitHub</h2>
+        
+        <div style="background: var(--dark-gray); padding: 2rem; border-radius: 12px; font-family: monospace; margin: 2rem 0;">
+            <div>git clone https://github.com/krillclaw/TinyDancer # 即将推出</div>
+            <div>cd TinyDancer</div>
+            <div>zig build -Doptimize=ReleaseSmall</div>
+            <div>./zig-out/bin/krillclaw "创建一个带认证的REST API"</div>
+        </div>
+        
+        <div style="text-align: center;">
+            <a href="#" class="btn btn-primary">★ 在GitHub上点星</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/privacy">隐私政策</a>
+            <a href="/terms">使用条款</a>
+            <a href="https://github.com/krillclaw">GitHub</a>
+            <a href="https://matusjagi.github.io/accelerandoai-site/">Accelerando AI</a>
+        </div>
+        
+        <p style="color: var(--gray);">
+            © 2026 KrillClaw™. Patent Pending. Made with 🦐 for the edge.
+        </p>
+        
+        <p style="color: var(--gray); font-size: 0.9rem; margin-top: 1rem;">
+            KrillClaw™是Accelerando AI的商标。
+        </p>
+    </footer>
+
+    <script>
+        function toggleUseCase(header) {
+            const useCase = header.parentElement;
+            const arrow = header.querySelector('div:last-child');
+            
+            useCase.classList.toggle('expanded');
+            arrow.textContent = useCase.classList.contains('expanded') ? '▲' : '▼';
+        }
+        
+        let selectedUseCase = null;
+        
+        function selectUseCase(element, type) {
+            document.querySelectorAll('.use-case-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedUseCase = type;
+            document.getElementById('nextBtn').disabled = false;
+        }
+        
+        function nextStep() {
+            if (!selectedUseCase) return;
+            
+            document.getElementById('step1').classList.remove('active');
+            document.getElementById('step2').classList.add('active');
+        }
+        
+        function submitWaitlist() {
+            const email = document.getElementById('emailInput').value;
+            if (!email || !email.includes('@')) {
+                alert('请输入有效的邮箱地址');
+                return;
+            }
+            
+            // Here you would normally send the data to your backend
+            console.log('Waitlist signup:', { email, useCase: selectedUseCase });
+            
+            document.getElementById('step2').classList.remove('active');
+            document.getElementById('step3').classList.add('active');
+        }
+    </script>
+</body>
+</html>
