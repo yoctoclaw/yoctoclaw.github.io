@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YoctoClaw — The World's Smallest Coding Agent</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Fira Code',monospace;line-height:1.6}
+.container{max-width:900px;margin:0 auto;padding:2rem}
+.hero{text-align:center;padding:4rem 0}
+.hero h1{font-size:2.5rem;color:#00ff88;margin-bottom:0.5rem}
+.hero .tagline{font-size:1.3rem;color:#888;margin-bottom:2rem}
+.hero .size{font-size:4rem;font-weight:bold;color:#fff;margin:1rem 0}
+pre.install{background:#111;border:1px solid #333;border-radius:8px;padding:1.5rem;margin:2rem auto;max-width:600px;text-align:left;overflow-x:auto;color:#00ff88}
+table{width:100%;border-collapse:collapse;margin:2rem 0}
+th,td{padding:0.75rem 1rem;text-align:center;border-bottom:1px solid #222}
+th{color:#00ff88;font-size:0.85rem;text-transform:uppercase}
+td:first-child{text-align:left;color:#fff;font-weight:bold}
+.highlight{color:#00ff88;font-weight:bold}
+h2{color:#00ff88;margin:3rem 0 1rem;font-size:1.5rem}
+.section{padding:2rem 0;border-top:1px solid #1a1a1a}
+.bar-chart .bar-row{display:flex;align-items:center;margin:0.5rem 0}
+.bar-chart .label{width:120px;text-align:right;padding-right:1rem;font-size:0.85rem}
+.bar-chart .bar{height:24px;background:#00ff88;border-radius:4px;min-width:2px;transition:width 0.3s}
+.bar-chart .bar.other{background:#333}
+.bar-chart .value{padding-left:0.5rem;font-size:0.8rem;color:#888}
+.hardware{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.hw-card{background:#111;border:1px solid #222;border-radius:8px;padding:1.5rem;text-align:center}
+.hw-card .price{font-size:1.5rem;color:#00ff88;font-weight:bold}
+.hw-card .name{color:#fff;margin:0.5rem 0}
+footer{text-align:center;padding:3rem 0;color:#555;font-size:0.85rem;border-top:1px solid #1a1a1a;margin-top:3rem}
+a{color:#00ff88;text-decoration:none}
+a:hover{text-decoration:underline}
+.cta{display:inline-block;padding:1rem 2rem;background:#00ff88;color:#0a0a0a;font-weight:bold;border-radius:8px;font-size:1.1rem;margin:1rem 0.5rem;text-decoration:none}
+.cta:hover{background:#00cc6a;text-decoration:none}
+.cta.secondary{background:transparent;border:2px solid #00ff88;color:#00ff88}
+.cta.secondary:hover{background:#00ff8820}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+<h1>YoctoClaw</h1>
+<p class="tagline">The world's smallest coding agent.</p>
+<p class="size">180KB</p>
+<p style="color:#888;margin-bottom:1rem">Zero dependencies. Runs on a smart ring.</p>
+<pre class="install">zig build -Doptimize=ReleaseSmall
+export ANTHROPIC_API_KEY=...
+./yoctoclaw "fix the bug"</pre>
+<a href="https://github.com/yoctoclaw/TinyDancer" class="cta">★ Star on GitHub</a>
+<a href="https://github.com/yoctoclaw/TinyDancer" class="cta secondary">View Source</a>
+</div>
+
+<div class="section">
+<h2>How it compares</h2>
+<table>
+<tr><th></th><th>YoctoClaw</th><th>Claude Code</th><th>Cursor</th><th>Aider</th></tr>
+<tr><td>Binary</td><td class="highlight">~180 KB</td><td>~50 MB</td><td>~500 MB</td><td>~50 MB</td></tr>
+<tr><td>RAM</td><td class="highlight">~2 MB</td><td>~200 MB</td><td>~1 GB</td><td>~150 MB</td></tr>
+<tr><td>Source</td><td class="highlight">~3,500 LOC</td><td>~100K LOC</td><td>?</td><td>~30K LOC</td></tr>
+<tr><td>Dependencies</td><td class="highlight">0</td><td>~500 npm</td><td>~1000+</td><td>~100 pip</td></tr>
+<tr><td>Boot time</td><td class="highlight">&lt;10 ms</td><td>~2s</td><td>~5s</td><td>~3s</td></tr>
+<tr><td>BLE transport</td><td class="highlight">Yes</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>Embedded target</td><td class="highlight">Yes</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>License</td><td class="highlight">MIT</td><td>Proprietary</td><td>Proprietary</td><td>Apache 2.0</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>16 files. ~3,500 lines. That's it.</h2>
+<p style="color:#888;margin-bottom:1.5rem">You can read the entire codebase in an hour.</p>
+<pre class="install" style="max-width:500px">agent.zig    — core loop (250 lines)
+api.zig      — multi-provider HTTP (329 lines)
+stream.zig   — SSE parser (344 lines)
+json.zig     — hand-rolled JSON (500 lines)
+tools_coding.zig — 7 tools (280 lines)
+context.zig  — token management (225 lines)</pre>
+<p style="color:#888;margin-top:1rem">Works with Claude, OpenAI, and Ollama. Switch providers with a flag.</p>
+</div>
+
+<div class="section">
+<h2>Runs on a $3 chip</h2>
+<p style="color:#888;margin-bottom:1.5rem">BLE and serial transport built in. Your phone bridges it to Claude.</p>
+<div class="hardware">
+<div class="hw-card"><div class="price">$3</div><div class="name">ESP32-C3</div><div style="color:#555">RISC-V, BLE 5.0</div></div>
+<div class="hw-card"><div class="price">$6</div><div class="name">Raspberry Pi Pico</div><div style="color:#555">RP2040, Serial</div></div>
+<div class="hw-card"><div class="price">$20</div><div class="name">Colmi R02 Ring</div><div style="color:#555">BLE, wearable agent</div></div>
+<div class="hw-card"><div class="price">$30</div><div class="name">nRF5340 DK</div><div style="color:#555">BLE 5.3, dual-core</div></div>
+</div>
+</div>
+
+<div class="section" style="text-align:center">
+<h2>Get started</h2>
+<pre class="install" style="text-align:left">git clone https://github.com/yoctoclaw/TinyDancer
+cd TinyDancer
+zig build -Doptimize=ReleaseSmall
+./zig-out/bin/yoctoclaw "create a REST API with auth"</pre>
+<p style="margin-top:2rem">
+<a href="https://github.com/yoctoclaw/TinyDancer" class="cta">★ Star on GitHub</a>
+</p>
+</div>
+
+</div>
+
+<footer>
+Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · <a href="https://github.com/yoctoclaw/TinyDancer">Source</a>
+</footer>
+
+</body>
+</html>
