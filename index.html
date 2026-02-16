@@ -120,15 +120,17 @@ export ANTHROPIC_API_KEY=...
 <h2>How it compares</h2>
 <table>
 <tr><th></th><th>YoctoClaw</th><th>Claude Code</th><th>Cursor</th><th>Aider</th></tr>
-<tr><td>Binary</td><td class="highlight">~180 KB</td><td>~50 MB</td><td>~500 MB</td><td>~50 MB</td></tr>
-<tr><td>RAM</td><td class="highlight">~2 MB</td><td>~200 MB</td><td>~1 GB</td><td>~150 MB</td></tr>
-<tr><td>Source</td><td class="highlight">~3,500 LOC</td><td>~100K LOC</td><td>?</td><td>~30K LOC</td></tr>
-<tr><td>Dependencies</td><td class="highlight">0</td><td>~500 npm</td><td>~1000+</td><td>~100 pip</td></tr>
-<tr><td>Boot time</td><td class="highlight">&lt;10 ms</td><td>~2s</td><td>~5s</td><td>~3s</td></tr>
+<tr><td>Install size</td><td class="highlight">180 KB</td><td>91 MB</td><td>~300 MB</td><td>~50 MB</td></tr>
+<tr><td>RAM</td><td class="highlight">2 MB</td><td>~200 MB</td><td>~1 GB</td><td>~150 MB</td></tr>
+<tr><td>Source</td><td class="highlight">~3,500 LOC</td><td>?</td><td>?</td><td>~40K LOC</td></tr>
+<tr><td>Dependencies</td><td class="highlight">0</td><td>bundled</td><td>?</td><td>~108 pip</td></tr>
+<tr><td>Boot</td><td class="highlight">&lt;10 ms</td><td>~400 ms</td><td>~5,000 ms</td><td>~3,000 ms</td></tr>
+<tr><td>Tools</td><td>7</td><td>20+</td><td>IDE-integrated</td><td>15+</td></tr>
 <tr><td>BLE transport</td><td class="highlight">Yes</td><td>No</td><td>No</td><td>No</td></tr>
 <tr><td>Embedded target</td><td class="highlight">Yes</td><td>No</td><td>No</td><td>No</td></tr>
 <tr><td>License</td><td class="highlight">MIT</td><td>Proprietary</td><td>Proprietary</td><td>Apache 2.0</td></tr>
 </table>
+<p style="color:#555;font-size:0.7rem;margin-top:0.5rem">Comparing footprint, not capability. YoctoClaw is intentionally minimal — it delegates intelligence to the LLM.</p>
 </div>
 
 <div class="section">
