@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KrillClaw™ Launch Instructions</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monospace;padding:2rem;line-height:1.8;max-width:700px;margin:0 auto}
+h1{color:#00ff88;font-size:1.5rem;margin:2rem 0 1rem;border-bottom:1px solid #1a1a1a;padding-bottom:0.5rem}
+h2{color:#00ff88;font-size:1.1rem;margin:1.5rem 0 0.5rem}
+h3{color:#ff6600;font-size:0.9rem;margin:1rem 0 0.3rem}
+p{color:#aaa;margin-bottom:0.75rem;font-size:0.85rem}
+li{color:#aaa;margin-bottom:0.3rem;font-size:0.85rem}
+ol,ul{padding-left:1.5rem;margin-bottom:1rem}
+strong{color:#fff}
+code{background:#111;padding:0.1rem 0.4rem;border-radius:4px;color:#00ff88;font-size:0.8rem}
+hr{border:none;border-top:1px solid #1a1a1a;margin:2rem 0}
+a{color:#00ff88}
+.back{display:inline-block;margin-bottom:1.5rem;color:#555;text-decoration:none;font-size:0.8rem}
+.back:hover{color:#00ff88}
+</style>
+</head>
+<body>
+<a href="/dashboard" class="back">← Back to Dashboard</a>
+<pre style="color:#aaa;font-size:0.85rem;white-space:pre-wrap;line-height:1.8"># Human Bottleneck Instructions — KrillClaw Launch
+*Things only Jonathan can do. Step-by-step. Estimated time for each.*
+
+---
+
+## 1. Buy Domains (~5 min)
+**Where:** Cloudflare dashboard (dash.cloudflare.com) — you already have an account for accelerando.ai
+
+1. Log into Cloudflare
+2. Go to **Domain Registration** → **Register Domain**
+3. Search and buy:
+   - `krillclaw.com` (~$10/yr) — **MUST BUY**
+   - `krillclaw.dev` (~$12/yr) — recommended
+   - `krillclaw.ai` (~$28/yr) — nice to have
+   - `krillclaw.io` (~$35/yr) — optional
+4. After purchase, tell Sophon the domain names and we'll set up DNS
+
+**Total: ~$50-85/yr for all four, or ~$22 for just .com + .dev**
+
+---
+
+## 2. Point accelerando.ai to GitHub Pages (~3 min)
+**Where:** Cloudflare dashboard → accelerando.ai → DNS
+
+1. Go to Cloudflare → accelerando.ai → DNS
+2. Add a CNAME record:
+   - **Name:** `@` (or `accelerando.ai`)
+   - **Target:** `matusjagi.github.io`
+   - **Proxy status:** DNS only (grey cloud)
+3. Add another CNAME:
+   - **Name:** `www`
+   - **Target:** `matusjagi.github.io`
+   - **Proxy status:** DNS only
+4. Tell Sophon when done — I'll add the CNAME file to the repo
+
+---
+
+## 3. Point krillclaw.com to GitHub Pages (~3 min)
+**Where:** Cloudflare dashboard → krillclaw.com → DNS
+*(Only after buying the domain)*
+
+1. Same as above but for krillclaw.com:
+   - CNAME `@` → `yoctoclaw.github.io` (or new org name)
+   - CNAME `www` → same
+2. Tell Sophon when done
+
+---
+
+## 4. Create GitHub Organizations (~5 min)
+**Where:** github.com/organizations/new
+
+1. Create org: **krillclaw**
+   - Free plan is fine
+   - Add matusjAGI as owner
+2. Create org: **accelerandoAI**
+   - Same setup
+3. Transfer repos:
+   - `yoctoclaw/yoctoclaw.github.io` → `krillclaw/krillclaw.github.io`
+   - `matusjAGI/accelerandoai-site` → `accelerandoAI/accelerandoAI.github.io`
+4. Tell Sophon when done — I'll update all links
+
+---
+
+## 5. Rotate OpenAI API Key (~3 min)
+**Where:** platform.openai.com + terminal
+
+1. Go to platform.openai.com → API Keys
+2. Create new key
+3. On MBP: `nano ~/.zshrc` — replace key on line 3
+4. On Mac Mini: Sophon will update openclaw.json (just give the new key via nano, NOT chat)
+5. Delete old key on platform.openai.com
+6. **NEVER paste the key in WhatsApp**
+
+---
+
+## 6. Set Up Waitlist Backend (~5 min)
+**Where:** Google Apps Script (script.google.com) + Google Sheets
+
+1. Create a new Google Sheet called "KrillClaw Waitlist"
+2. Copy the Sheet ID from the URL (the long string between /d/ and /edit)
+3. Go to script.google.com → New Project
+4. Sophon will tell you what code to paste (via the sheet itself or Obsidian, not WhatsApp)
+5. Put the Sheet ID in the code where it says `SHEET_ID = ''`
+6. Deploy → Web App:
+   - Execute as: **Me**
+   - Who has access: **Anyone**
+7. Copy the deployment URL and give it to Sophon
+8. Run the `setupSheet()` function once to create headers
+
+---
+
+## 7. File Provisional Patent (~15 min to review, ~30 min to file)
+**Where:** USPTO (uspto.gov/patents/apply)
+
+1. Sophon will draft the provisional application (technical description + claims)
+2. Jonathan reviews in Google Docs
+3. File via USPTO EFS-Web:
+   - Filing fee: ~$160 (micro entity) or ~$320 (small entity)
+   - Upload PDF of the application
+   - You get a filing receipt with application number
+4. "Patent Pending" is then legally valid for 12 months
+
+---
+
+## 8. File Trademark Application (~20 min)
+**Where:** USPTO TEAS (teas.uspto.gov)
+
+1. Search TESS first to confirm no conflicts (Sophon can do this)
+2. File TEAS Plus application:
+   - Mark: KrillClaw
+   - Class: IC 009 (computer software)
+   - Filing fee: ~$250
+   - Specimen: screenshot of website showing mark in use
+3. Takes 8-12 months to register but ™ is valid immediately
+
+---
+
+## 9. Git History Squash (~10 min)
+**Where:** Terminal on MBP
+
+Sophon will prepare the exact commands. You just run them:
+1. SSH into MBP
+2. Run the squash script (replaces author on all commits)
+3. Force push
+4. Verify no PII remains
+
+---
+
+## Priority Order
+1. **Buy krillclaw.com** (before someone else grabs it)
+2. **Point accelerando.ai DNS** (site is ready, just needs DNS)
+3. **OpenAI key rotation** (security — key was exposed)
+4. **Create GitHub orgs** (clean up repo structure)
+5. **Waitlist backend** (make signup functional)
+6. **Provisional patent** (before launch — protects IP)
+7. **Trademark** (can do anytime, ™ already in use)
+8. **Git squash** (before going public)
+9. **Point krillclaw.com** (after domain purchase)
+
+---
+*Last updated: 2026-02-16*
+</pre>
+</body>
+</html>

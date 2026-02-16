@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KrillClaw™ Launch Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monospace;padding:1.5rem;line-height:1.6}
+h1{color:#00ff88;font-size:1.5rem;margin-bottom:0.3rem}
+.subtitle{color:#555;font-size:0.8rem;margin-bottom:2rem}
+h2{color:#00ff88;font-size:1rem;margin:2rem 0 1rem;padding-bottom:0.3rem;border-bottom:1px solid #1a1a1a}
+.card{background:#111;border:1px solid #222;border-radius:10px;padding:1.2rem;margin-bottom:0.8rem}
+.card-title{color:#fff;font-weight:bold;margin-bottom:0.5rem;font-size:0.9rem}
+.status{display:inline-block;padding:0.15rem 0.5rem;border-radius:4px;font-size:0.7rem;font-weight:bold;margin-left:0.5rem}
+.red{background:#ff444420;color:#ff4444}
+.yellow{background:#ffaa0020;color:#ffaa00}
+.green{background:#00ff8820;color:#00ff88}
+.blue{background:#00aaff20;color:#00aaff}
+.item{padding:0.4rem 0;border-bottom:1px solid #0a0a0a;font-size:0.8rem;display:flex;justify-content:space-between;align-items:center}
+.item:last-child{border-bottom:none}
+.item .who{color:#555;font-size:0.7rem}
+.link{color:#00ff88;text-decoration:none;font-size:0.8rem}
+.link:hover{text-decoration:underline}
+.section-links{display:flex;flex-direction:column;gap:0.5rem;margin-top:0.5rem}
+.section-link{padding:0.6rem 1rem;background:#0a0a0a;border:1px solid #1a1a1a;border-radius:8px;display:flex;justify-content:space-between;align-items:center;text-decoration:none;color:#e0e0e0;transition:border-color 0.2s}
+.section-link:hover{border-color:#00ff88}
+.section-link .label{font-size:0.85rem}
+.section-link .meta{color:#555;font-size:0.7rem}
+.progress-bar{height:4px;background:#1a1a1a;border-radius:2px;margin-top:0.5rem;overflow:hidden}
+.progress-fill{height:100%;background:#00ff88;border-radius:2px;transition:width 0.3s}
+.timestamp{color:#333;font-size:0.65rem;text-align:center;margin-top:2rem}
+</style>
+</head>
+<body>
+
+<h1>🦐 KrillClaw™ Launch Dashboard</h1>
+<p class="subtitle">Last updated: Feb 16, 2026 · Sprint cron running every 5 min</p>
+
+<h2>🚨 Jonathan's Action Items</h2>
+<div class="card">
+<div class="item"><span>1. Buy krillclaw.com domain (Cloudflare)</span><span class="status red">URGENT</span></div>
+<div class="item"><span>2. Point accelerando.ai DNS → GitHub Pages</span><span class="status red">3 min</span></div>
+<div class="item"><span>3. Rotate OpenAI API key (exposed Feb 16)</span><span class="status red">SECURITY</span></div>
+<div class="item"><span>4. Create GitHub orgs (krillclaw + accelerandoAI)</span><span class="status yellow">5 min</span></div>
+<div class="item"><span>5. Set up waitlist backend (Google Apps Script)</span><span class="status yellow">5 min</span></div>
+<div class="item"><span>6. Review & file provisional patent</span><span class="status yellow">~$160</span></div>
+<div class="item"><span>7. File TM application for KrillClaw™</span><span class="status yellow">~$250</span></div>
+<div class="item"><span>8. Git history squash (run commands)</span><span class="status yellow">10 min</span></div>
+<div class="item"><span>9. Set repo public</span><span class="status blue">After squash</span></div>
+</div>
+<p style="color:#555;font-size:0.75rem;margin-top:0.3rem">📋 Detailed step-by-step for each: <a href="/instructions" class="link">Instructions Page</a></p>
+
+<h2>📊 Launch Progress</h2>
+<div class="card">
+<div class="card-title">Pre-Launch Checklist <span class="status yellow">40%</span></div>
+<div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+<div style="margin-top:0.8rem">
+<div class="item"><span>✅ Website live + renamed to KrillClaw</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Comparison table (vs MimiClaw/PicoClaw/OpenClaw)</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Use cases + retrofit section</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Chinese translation</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Waitlist dialog (UI done)</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Privacy + Terms pages</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ TM + Patent Pending on site</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Onboarding wizard prototype</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ LLM provider marquee (17 providers)</span><span class="who">Sophon</span></div>
+<div class="item"><span>✅ Messaging cleanup (no more "coding agent")</span><span class="who">Sophon</span></div>
+<div class="item"><span>🟡 Pixel art mascot / visual identity</span><span class="who">In progress</span></div>
+<div class="item"><span>🟡 MimiClaw parity plan</span><span class="who">Dave reviewing</span></div>
+<div class="item"><span>🔴 Waitlist backend (needs Google Apps Script)</span><span class="who">Jonathan</span></div>
+<div class="item"><span>🔴 Domain purchase</span><span class="who">Jonathan</span></div>
+<div class="item"><span>🔴 DNS configuration</span><span class="who">Jonathan</span></div>
+<div class="item"><span>🔴 Git history anonymization</span><span class="who">Jonathan</span></div>
+<div class="item"><span>🔴 Repo public</span><span class="who">Jonathan</span></div>
+<div class="item"><span>🔴 OpenAI key rotation</span><span class="who">Jonathan</span></div>
+</div>
+</div>
+
+<h2>📎 Files for Review</h2>
+<div class="section-links">
+<a href="https://yoctoclaw.github.io" class="section-link">
+<span class="label">🌐 KrillClaw Website (EN)</span>
+<span class="meta">Live →</span>
+</a>
+<a href="https://yoctoclaw.github.io/zh/" class="section-link">
+<span class="label">🇨🇳 KrillClaw Website (中文)</span>
+<span class="meta">Live →</span>
+</a>
+<a href="https://yoctoclaw.github.io/wizard" class="section-link">
+<span class="label">🧙 Onboarding Wizard</span>
+<span class="meta">Prototype →</span>
+</a>
+<a href="https://matusjagi.github.io/accelerandoai-site/" class="section-link">
+<span class="label">🚀 Accelerando AI Landing</span>
+<span class="meta">Live →</span>
+</a>
+</div>
+
+<h2>🤖 Agent Tasks Running</h2>
+<div class="card">
+<div class="item"><span>Chinese site fix (match EN styling)</span><span class="status green">Running</span></div>
+<div class="item"><span>Dave: MimiClaw parity plan</span><span class="status green">Running</span></div>
+<div class="item"><span>Launch sprint cron (every 5 min)</span><span class="status green">Active</span></div>
+<div class="item"><span>Competitor watch cron (daily 10am)</span><span class="status green">Active</span></div>
+<div class="item"><span>Self-eval cron (hourly)</span><span class="status green">Active</span></div>
+</div>
+
+<h2>🏁 Competitors</h2>
+<div class="card">
+<div class="item"><span>🐱 MimiClaw — 2K ⭐, C, ~2MB, ESP32-S3</span><span class="status red">THREAT</span></div>
+<div class="item"><span>🐦 PicoClaw — 5K ⭐, Go, ~8MB, LicheeRV</span><span class="status yellow">WATCH</span></div>
+</div>
+
+<div class="timestamp">Dashboard auto-updates via launch sprint cron · Sprint started Feb 16 2026</div>
+
+</body>
+</html>
