@@ -15,7 +15,7 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 .wizard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,#00ff8810,transparent 50%),radial-gradient(circle at 70% 30%,#00aaff08,transparent 40%);pointer-events:none}
 
 /* Pixel art krill */
-.krill-pixel{display:inline-grid;grid-template-columns:repeat(24,8px);gap:1px;margin-bottom:1rem;filter:drop-shadow(0 0 8px #00ff8840)}
+.krill-pixel{display:inline-grid;grid-template-columns:repeat(24,8px);gap:1px;margin-bottom:1rem;filter:drop-shadow(0 0 8px #ff886640) drop-shadow(0 0 16px #ff886620)}
 .krill-pixel span{width:8px;height:8px;border-radius:1px;display:block}
 
 .wizard-header h1{font-size:1.3rem;color:#00ff88;margin-bottom:0.25rem;position:relative}
@@ -271,26 +271,28 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 </div>
 
 <script>
-// Pixel art krill - 24x14 grid, much more detailed
-// Colors: 0=transparent, g=#00ff88, G=#00cc66, o=#ff6600, O=#cc5500, b=#00aaff, B=#0088cc, w=#ffffff, d=#006644
+// Pixel art krill - 24x16 grid, cute kawaii shrimp/krill
+// s=#ff8866 body, d=#ee6644 dark segment, h=#ffaa88 highlight, w=#ffffff eye, b=#000000 pupil, a=#dd7755 antenna, l=#cc5533 leg
 (function(){
 var rows=[
-  '000000000000gggg00000000',
-  '0000000000ggGGGGgg000000',
-  '000000000gGwwGGGooog0000',
-  '00000000gGGGGGGGGooGg000',
-  '0000000gGoGGGGGGGGGGgb00',
-  '000000gGGGggggggGGGGgbb0',
-  '00000gGGgg0000ooggGgbb00',
-  '0000gGGg0000000gggbb000b',
-  '00000gGgg00000ggb0000b00',
-  '000000ggGGggggG000000000',
-  '00000000gGgGgGg000000000',
-  '0000000gG0gG0gG00000000',
-  '000000gG00gG00gG0000000',
-  '00000g0000g0000g00000000',
+  '0000000000000000a00a0000',
+  '00000000000000000aa00000',
+  '00000000000000hhsa000000',
+  '0000000000000hhswbs00000',
+  '00000000000000sssssds000',
+  '000000000000sdddsssss000',
+  '00000000000sssssddss0000',
+  '000000000ssdddsssss00000',
+  '00000000sssssddss0000000',
+  '000000ssdddssss000000000',
+  '0000000l00l00l0000000000',
+  '00000ssssssss00000000000',
+  '0000sssshhs0000000000000',
+  '000shh00hhs0000000000000',
+  '00sh00000sh0000000000000',
+  '000000000000000000000000'
 ];
-var colors={g:'#00ff88',G:'#00cc66',o:'#ff6600',O:'#cc5500',b:'#00aaff',B:'#0088cc',w:'#ffffff',d:'#006644'};
+var colors={s:'#ff8866',d:'#ee6644',h:'#ffaa88',w:'#ffffff',b:'#000000',a:'#dd7755',l:'#cc5533'};
 var el=document.getElementById('krill-art');
 for(var r=0;r<rows.length;r++){
   for(var c=0;c<24;c++){
