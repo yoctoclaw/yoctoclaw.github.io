@@ -90,6 +90,10 @@ a:hover{text-decoration:underline}
 .usecase-card summary::after{content:'+';color:#555;font-size:1.2rem;font-weight:bold;transition:transform 0.2s}
 .usecase-card[open] summary::after{content:'−'}
 .usecase-card .card-body{padding:0 1.5rem 1.5rem}
+
+dialog::backdrop{background:rgba(0,0,0,0.7);backdrop-filter:blur(4px)}
+dialog{animation:dialogIn 0.2s ease}
+@keyframes dialogIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 .swipe-hint{text-align:center;color:#333;font-size:0.7rem;margin-top:0.8rem}
 </style>
 </head>
@@ -373,13 +377,62 @@ context.zig  — token management (225 lines)</pre>
 
 <div class="section" id="waitlist-section" style="text-align:center;padding:3rem 0">
 <h2>🦐 I Want One!</h2>
-<p style="color:#888;margin-bottom:1.5rem">Sign up to get pre-flashed KrillClaw devices.</p>
-<form style="max-width:400px;margin:0 auto;display:flex;gap:0.5rem" onsubmit="event.preventDefault();this.querySelector('button').textContent='Added!';this.querySelector('button').style.background='#00cc6a'">
-<input type="email" placeholder="your@email.com" required style="flex:1;padding:0.75rem 1rem;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-family:inherit;font-size:0.9rem">
-<button type="submit" style="padding:0.75rem 1.5rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:0.9rem;white-space:nowrap">I Want One!</button>
-</form>
+<p style="color:#888;margin-bottom:1.5rem">Sign up to get pre-flashed KrillClaw™ devices.</p>
+<button onclick="document.getElementById('waitlist-dialog').showModal()" style="padding:1rem 2.5rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:1.1rem">I Want One!</button>
 <p style="color:#444;font-size:0.7rem;margin-top:1rem">No spam. Just a ping when hardware ships.</p>
 </div>
+
+<dialog id="waitlist-dialog" style="background:#111;color:#e0e0e0;border:1px solid #333;border-radius:16px;padding:0;max-width:480px;width:90%;font-family:'SF Mono','Fira Code',monospace">
+<div style="padding:2rem">
+
+<!-- Step 1: Use case selection -->
+<div id="wl-step1">
+<h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">What do you want to build?</h3>
+<p style="color:#888;font-size:0.8rem;margin-bottom:1.5rem">Pick what excites you most. Helps us prioritize what ships first.</p>
+<div style="display:flex;flex-direction:column;gap:0.6rem" id="wl-options">
+<label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
+<input type="radio" name="usecase" value="tinker" style="accent-color:#00ff88;width:16px;height:16px">
+<span style="font-size:0.85rem">🔧 I want to tinker and see what's possible</span>
+</label>
+<label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
+<input type="radio" name="usecase" value="kids" style="accent-color:#00ff88;width:16px;height:16px">
+<span style="font-size:0.85rem">👨‍👧 I want to teach my kid how to add AI to stuff at home</span>
+</label>
+<label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
+<input type="radio" name="usecase" value="retrofit" style="accent-color:#00ff88;width:16px;height:16px">
+<span style="font-size:0.85rem">🔄 I want to future-proof my existing hardware</span>
+</label>
+<label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
+<input type="radio" name="usecase" value="fleet" style="accent-color:#00ff88;width:16px;height:16px">
+<span style="font-size:0.85rem">🏭 I want to build a massive fleet of AI agents on cheap hardware</span>
+</label>
+<label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
+<input type="radio" name="usecase" value="other" style="accent-color:#00ff88;width:16px;height:16px">
+<span style="font-size:0.85rem">✨ Something else entirely</span>
+</label>
+</div>
+<button id="wl-next" onclick="wlNext()" disabled style="margin-top:1.5rem;width:100%;padding:0.75rem;background:#333;color:#555;border:none;border-radius:8px;font-weight:bold;cursor:not-allowed;font-family:inherit;font-size:0.9rem;transition:all 0.2s">Select an option to continue</button>
+</div>
+
+<!-- Step 2: Email -->
+<div id="wl-step2" style="display:none">
+<h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">Almost there!</h3>
+<p style="color:#888;font-size:0.8rem;margin-bottom:1.5rem">Drop your email and we'll ping you when devices are ready.</p>
+<input type="email" id="wl-email" placeholder="your@email.com" required style="width:100%;padding:0.75rem 1rem;background:#0a0a0a;border:1px solid #333;border-radius:8px;color:#fff;font-family:inherit;font-size:0.9rem;margin-bottom:1rem">
+<button id="wl-submit" onclick="wlSubmit()" style="width:100%;padding:0.75rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:0.9rem">Sign me up 🦐</button>
+<p style="color:#444;font-size:0.7rem;margin-top:0.75rem;text-align:center">We'll send a verification link. No spam, ever.</p>
+</div>
+
+<!-- Step 3: Confirmation -->
+<div id="wl-step3" style="display:none;text-align:center;padding:1rem 0">
+<p style="font-size:2rem;margin-bottom:0.75rem">🦐</p>
+<h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">Check your inbox!</h3>
+<p style="color:#888;font-size:0.85rem">We sent a verification link to <strong id="wl-email-display" style="color:#fff"></strong>. Click it to confirm your spot.</p>
+<button onclick="document.getElementById('waitlist-dialog').close()" style="margin-top:1.5rem;padding:0.5rem 1.5rem;background:transparent;border:1px solid #333;border-radius:8px;color:#888;cursor:pointer;font-family:inherit;font-size:0.85rem">Close</button>
+</div>
+
+</div>
+</dialog>
 
 <div class="section" style="text-align:center">
 <h2>Get started with GitHub</h2>
@@ -469,5 +522,64 @@ Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · P
 })();
 </script>
 
+
+<script>
+// Waitlist dialog logic
+(function(){
+  var radios = document.querySelectorAll('input[name="usecase"]');
+  var nextBtn = document.getElementById('wl-next');
+  var labels = document.querySelectorAll('#wl-options label');
+  
+  radios.forEach(function(r){
+    r.addEventListener('change', function(){
+      nextBtn.disabled = false;
+      nextBtn.style.background = '#00ff88';
+      nextBtn.style.color = '#0a0a0a';
+      nextBtn.style.cursor = 'pointer';
+      nextBtn.textContent = 'Continue →';
+      labels.forEach(function(l){ l.style.borderColor = '#222'; });
+      r.closest('label').style.borderColor = '#00ff88';
+    });
+  });
+  
+  // Close on backdrop click
+  var dialog = document.getElementById('waitlist-dialog');
+  dialog.addEventListener('click', function(e){
+    if(e.target === dialog) dialog.close();
+  });
+  
+  // Reset on close
+  dialog.addEventListener('close', function(){
+    document.getElementById('wl-step1').style.display = '';
+    document.getElementById('wl-step2').style.display = 'none';
+    document.getElementById('wl-step3').style.display = 'none';
+    radios.forEach(function(r){ r.checked = false; });
+    labels.forEach(function(l){ l.style.borderColor = '#222'; });
+    nextBtn.disabled = true;
+    nextBtn.style.background = '#333';
+    nextBtn.style.color = '#555';
+    nextBtn.style.cursor = 'not-allowed';
+    nextBtn.textContent = 'Select an option to continue';
+    document.getElementById('wl-email').value = '';
+  });
+})();
+
+function wlNext(){
+  document.getElementById('wl-step1').style.display = 'none';
+  document.getElementById('wl-step2').style.display = '';
+  document.getElementById('wl-email').focus();
+}
+
+function wlSubmit(){
+  var email = document.getElementById('wl-email').value;
+  if(!email || !email.includes('@')) return;
+  var usecase = document.querySelector('input[name="usecase"]:checked').value;
+  // TODO: POST to backend/webhook
+  console.log('Waitlist signup:', {email: email, usecase: usecase});
+  document.getElementById('wl-email-display').textContent = email;
+  document.getElementById('wl-step2').style.display = 'none';
+  document.getElementById('wl-step3').style.display = '';
+}
+</script>
 </body>
 </html>
