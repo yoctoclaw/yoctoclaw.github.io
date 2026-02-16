@@ -677,6 +677,7 @@ tools_coding.zig — 7 tools (280 lines)</pre>
 <h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">Almost there!</h3>
 <p style="color:#888;font-size:0.8rem;margin-bottom:1.5rem">Drop your email and we'll ping you when devices are ready.</p>
 <input type="email" id="wl-email" placeholder="your@email.com" required style="width:100%;padding:0.75rem 1rem;background:#0a0a0a;border:1px solid #333;border-radius:8px;color:#fff;font-family:inherit;font-size:0.9rem;margin-bottom:1rem">
+<input type="text" id="wl-website" name="website" style="position:absolute;left:-9999px;opacity:0;height:0" tabindex="-1" autocomplete="off">
 <button id="wl-submit" onclick="wlSubmit()" style="width:100%;padding:0.75rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:0.9rem">Sign me up 🦐</button>
 <p style="color:#444;font-size:0.7rem;margin-top:0.75rem;text-align:center">We'll send a verification link. No spam, ever.</p>
 </div>
@@ -684,8 +685,8 @@ tools_coding.zig — 7 tools (280 lines)</pre>
 <!-- Step 3: Confirmation -->
 <div id="wl-step3" style="display:none;text-align:center;padding:1rem 0">
 <p style="font-size:2rem;margin-bottom:0.75rem">🦐</p>
-<h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">Check your inbox!</h3>
-<p style="color:#888;font-size:0.85rem">We sent a verification link to <strong id="wl-email-display" style="color:#fff"></strong>. Click it to confirm your spot.</p>
+<h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">You're on the list!</h3>
+<p style="color:#888;font-size:0.85rem">We'll ping <strong id="wl-email-display" style="color:#fff"></strong> when hardware is ready to ship.</p>
 <button onclick="document.getElementById('waitlist-dialog').close()" style="margin-top:1.5rem;padding:0.5rem 1.5rem;background:transparent;border:1px solid #333;border-radius:8px;color:#888;cursor:pointer;font-family:inherit;font-size:0.85rem">Close</button>
 </div>
 
@@ -869,11 +870,32 @@ function wlNext(){
 function wlSubmit(){
   var email = document.getElementById('wl-email').value;
   if(!email || !email.includes('@')) return;
+  var honeypot = document.getElementById('wl-website').value;
   var usecase = document.querySelector('input[name="usecase"]:checked').value;
-  console.log('Waitlist signup:', {email: email, usecase: usecase});
-  document.getElementById('wl-email-display').textContent = email;
-  document.getElementById('wl-step2').style.display = 'none';
-  document.getElementById('wl-step3').style.display = '';
+  var btn = document.getElementById('wl-submit');
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  var ENDPOINT = 'APPS_SCRIPT_ENDPOINT';
+  fetch(ENDPOINT, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({
+      email: email,
+      source: 'krillclaw.com',
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      useCase: usecase,
+      website: honeypot
+    })
+  }).then(function(r){ return r.json(); }).then(function(){
+    document.getElementById('wl-email-display').textContent = email;
+    document.getElementById('wl-step2').style.display = 'none';
+    document.getElementById('wl-step3').style.display = '';
+  }).catch(function(){
+    document.getElementById('wl-email-display').textContent = email;
+    document.getElementById('wl-step2').style.display = 'none';
+    document.getElementById('wl-step3').style.display = '';
+  });
 }
 </script>
 </body>
