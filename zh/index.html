@@ -518,31 +518,31 @@ zig build -Doptimize=ReleaseSmall
 <h2>常见问题</h2>
 <details class="faq-item">
 <summary>需要 WiFi 吗？</summary>
-<div class="faq-answer"><strong>Spoke（180KB）：</strong>不需要。通过 BLE 或串口连接到 Hub（你的手机、树莓派或另一个 KrillClaw 节点）。Hub 负责联网。你的设备不需要 WiFi 凭据或 API 密钥。<br><strong>Hub（≤500KB）：</strong>需要。通过 WiFi/HTTP 直连 LLM API。完全自主运行，不依赖手机。</div>
+<div class="faq-answer"><strong>Lite（180KB）：</strong>不需要。通过 BLE 或串口连接到 Full 版（你的手机、树莓派或另一个 KrillClaw 节点）。Full 版负责联网。你的设备不需要 WiFi 凭据或 API 密钥。<br><strong>Full（≤500KB）：</strong>需要。通过 WiFi/HTTP 直连 LLM API。完全自主运行，不依赖手机。</div>
 </details>
 <details class="faq-item">
-<summary>Spoke 和 Hub 有什么区别？</summary>
-<div class="faq-answer"><strong>Spoke</strong> 是 180KB 的 BLE/串口智能体，运行在 $3 芯片上——传感器、执行器、本地逻辑、ReAct 推理。通过 Hub 调用 LLM。无需 WiFi，设备上无 API 密钥，超低功耗（~10mA）。<br><strong>Hub</strong> 是 ≤500KB 的完整智能体，内置 HTTP/TLS。运行在 ESP32-S3、树莓派或任何 Linux 开发板上。直连任意 LLM 提供商。还可以协调多个 Spoke 节点。</div>
+<summary>Lite 和 Full 有什么区别？</summary>
+<div class="faq-answer"><strong>Lite</strong> 是 180KB 的 BLE/串口智能体，运行在 $3 芯片上——传感器、执行器、本地逻辑、ReAct 推理。通过 Full 版调用 LLM。无需 WiFi，设备上无 API 密钥，超低功耗（~10mA）。<br><strong>Full</strong> 是 ≤500KB 的完整版智能体，内置 HTTP/TLS。运行在 ESP32-S3、树莓派或任何 Linux 开发板上。直连任意 LLM 提供商。还可以协调多个 Lite 节点。</div>
 </details>
 <details class="faq-item">
 <summary>API 调用费用是多少？</summary>
-<div class="faq-answer">典型用量：每月 $0.50–2。你自带 API 密钥（存在 Hub 或手机上），自己控制预算。KrillClaw 本身免费开源。</div>
+<div class="faq-answer">典型用量：每月 $0.50–2。你自带 API 密钥（存在 Full 版或手机上），自己控制预算。KrillClaw 本身免费开源。</div>
 </details>
 <details class="faq-item">
 <summary>断网了怎么办？</summary>
-<div class="faq-answer"><strong>Spoke：</strong>本地操作继续运行（传感器读取、GPIO、定时任务）。消息排队等待 BLE 重连后同步。<br><strong>Hub：</strong>LLM 调用排队，指数退避重试，WiFi 恢复后无缝续接。本地操作不受影响。</div>
+<div class="faq-answer"><strong>Lite：</strong>本地操作继续运行（传感器读取、GPIO、定时任务）。消息排队等待 BLE 重连后同步。<br><strong>Full：</strong>LLM 调用排队，指数退避重试，WiFi 恢复后无缝续接。本地操作不受影响。</div>
 </details>
 <details class="faq-item">
 <summary>不用 ESP32 可以吗？</summary>
-<div class="faq-answer">可以——Hub 配置可运行在任何 Linux ARM/RISC-V 开发板、树莓派、路由器等，只要有 2MB 内存。ESP32 是最小目标平台，不是唯一选择。</div>
+<div class="faq-answer">可以——Full 配置可运行在任何 Linux ARM/RISC-V 开发板、树莓派、路由器等，只要有 2MB 内存。ESP32 是最小目标平台，不是唯一选择。</div>
 </details>
 <details class="faq-item">
 <summary>真的只有 180KB 吗？</summary>
-<div class="faq-answer">Spoke 配置是 180KB——BLE/串口传输，不含 HTTP 协议栈和 TLS。这是真实嵌入式场景下的真实二进制大小。Hub 配置 ≤500KB，因为包含了直连 LLM API 所需的 HTTP/TLS。两个配置都比任何竞品小。</div>
+<div class="faq-answer">Lite 配置是 180KB——BLE/串口传输，不含 HTTP 协议栈和 TLS。这是真实嵌入式场景下的真实二进制大小。Full 配置 ≤500KB，因为包含了直连 LLM API 所需的 HTTP/TLS。两个配置都比任何竞品小。</div>
 </details>
 <details class="faq-item">
 <summary>该选哪个配置？</summary>
-<div class="faq-answer"><strong>选 Spoke：</strong>设备在手机或 Hub 附近、追求最小二进制、不想在设备上存 API 密钥、或优化功耗时。<br><strong>选 Hub：</strong>设备需要在无手机的环境下自主运行，或需要协调其他 Spoke 节点时。</div>
+<div class="faq-answer"><strong>选 Lite：</strong>设备在手机或 Full 版附近、追求最小二进制、不想在设备上存 API 密钥、或优化功耗时。<br><strong>选 Full：</strong>设备需要在无手机的环境下自主运行，或需要协调其他 Lite 节点时。</div>
 </details>
 </div>
 
