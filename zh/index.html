@@ -7,12 +7,12 @@
 <meta name="description" content="KrillClaw is the smallest AI agent runtime for edge devices. 180KB binary in Zig. Zero dependencies. Runs on a $3 ESP32 — no OS required. Works with any OpenAI-compatible LLM.">
 <meta name="keywords" content="edge AI, agent runtime, Zig, embedded AI, IoT, ESP32, microcontroller, LLM, Claude, OpenAI, Ollama, BLE, minimal, lightweight, zero dependencies">
 <meta property="og:title" content="KrillClaw™ — The Smallest Edge AI Agent Runtime">
-<meta property="og:description" content="180KB AI agent runtime for edge devices. Zero dependencies. Runs on a $3 chip — no OS required.">
+<meta property="og:description" content="180KB 边缘设备 AI 智能体运行时。零依赖。运行在 $3 芯片上——无需操作系统。">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://krillclaw.github.io">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="KrillClaw — 180KB Edge AI Runtime">
-<meta name="twitter:description" content="The smallest AI agent runtime. 180KB. Zero deps. Runs on a $3 ESP32. Works with any LLM.">
+<meta name="twitter:description" content="最小的 AI 智能体运行时。180KB。零依赖。运行在 $3 ESP32 上。支持任何 LLM。">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="canonical" href="https://krillclaw.github.io">
 <meta property="og:image" content="https://krillclaw.github.io/assets/og-image.jpg">
@@ -254,42 +254,42 @@ context.zig  — token management (225 lines)</pre>
 <summary>
 <div><span style="color:#00aaff;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🏠 智能家居</span><br><span style="color:#fff;font-size:1rem;font-weight:600">冰箱自动管理你的食品采购</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">A $3 ESP32 inside your fridge watches what gets consumed. It notices you're low on oat milk, checks your Instacart history, and pings you on WhatsApp: <em style="color:#aaa">"You tried that new Greek yogurt last week but didn't reorder — want to go back to your usual Fage, or give it another shot?"</em> It learns your preferences over time. No app. No screen. Just a chip that pays attention.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">一颗 $3 的 ESP32 装在冰箱里，默默追踪你的消耗。它发现燕麦奶快喝完了，查看你的购物记录，然后通过微信提醒你：<em style="color:#aaa">"上周你试了那款新的希腊酸奶但没有复购——要换回你常买的品牌，还是再给它一次机会？"</em> 它会随着时间学习你的偏好。不需要 App，不需要屏幕，只需一颗会观察的芯片。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #00aaff">
 <summary>
 <div><span style="color:#00aaff;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🏠 智能家居</span><br><span style="color:#fff;font-size:1rem;font-weight:600">看到你回来就自动开门的车库</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">You're walking home with hands full of grocery bags. KrillClaw on your garage monitors the house vicinity via your security camera. It sees you approaching with your hands full, recognizes you, understands the situation, and opens the garage door as you walk up — so you don't have to awkwardly dig for the clicker.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">你提着满手购物袋走回家。KrillClaw 通过安防摄像头监控车库周围环境，看到你双手满载地走过来，识别出是你，理解当前情境，在你走近时自动打开车库门——不用手忙脚乱地翻找遥控器。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #ff8833">
 <summary>
 <div><span style="color:#ff8833;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🌱 物联网与农业</span><br><span style="color:#fff;font-size:1rem;font-weight:600">自主管理的智能温室</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">Soil moisture drops. Temperature spikes. A traditional sensor triggers a fixed rule. A KrillClaw node reads the sensors, checks the 5-day forecast, recognizes the tomatoes are in flowering stage (needs less water, more heat), and adjusts the irrigation schedule accordingly. It messages you a weekly report: <em style="color:#aaa">"Tomatoes on track for harvest in ~12 days. Reduced watering 15% — soil was retaining more than usual after Tuesday's rain."</em></p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">土壤湿度下降，温度飙升。传统传感器只会触发固定规则。而 KrillClaw 节点读取传感器数据后，还会查看未来 5 天天气预报，识别出番茄正处于开花期（需要少浇水、多保温），并据此调整灌溉计划。每周给你发一份报告：<em style="color:#aaa">"番茄预计约 12 天后可收获。已减少 15% 浇水量——周二那场雨后土壤保水性高于往常。"</em></p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #ff8833">
 <summary>
 <div><span style="color:#ff8833;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🏭 工业</span><br><span style="color:#fff;font-size:1rem;font-weight:600">能自我诊断的工厂设备</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">A CNC machine's vibration pattern changes subtly. The KrillClaw node on the motor controller notices, cross-references the maintenance log stored in flash, and messages the floor supervisor: <em style="color:#aaa">"Spindle vibration up 12% since Monday — similar to the pattern before the bearing replacement in October. Recommend inspection within 48 hours. Current job will finish fine."</em> Predictive maintenance without a $50K platform.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">一台 CNC 机床的振动模式发生了细微变化。电机控制器上的 KrillClaw 节点察觉到异常，交叉比对闪存中的维护日志，然后给车间主管发消息：<em style="color:#aaa">"主轴振动自周一以来上升了 12%——与十月份更换轴承前的模式相似。建议 48 小时内检查。当前任务可以正常完成。"</em> 不需要 $50K 的平台就能实现预测性维护。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #00ff88">
 <summary>
 <div><span style="color:#00ff88;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🤖 机器人</span><br><span style="color:#fff;font-size:1rem;font-weight:600">按需下载技能的仿生手</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">A prosthetic hand with KrillClaw embedded. It reads context from sensors and a wrist camera, then downloads fine-motor skill profiles from the cloud in real time. Picking up chopsticks for the first time? It loads a precision-grip pattern. Need to do a card trick at a party? Shuffling dexterity profile, downloaded in seconds. A medic on a battlefield needs to perform an emergency procedure on a fellow soldier? Surgical-assist mode — steady hands, guided movements, zero tremor. Same hardware. Infinite skills. The hand learns what you need before you ask.</p><p style="color:#444;font-size:0.7rem;font-style:italic;margin-top:0.5rem">This is where edge AI is heading. KrillClaw is the runtime that makes it possible.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">一只嵌入了 KrillClaw 的仿生义手。它通过传感器和腕部摄像头读取环境信息，然后实时从云端下载精细运动技能配置。第一次拿筷子？加载精准抓握模式。聚会上想表演纸牌魔术？洗牌灵巧配置，几秒下载完成。战场上的军医需要对战友进行紧急手术？外科辅助模式——稳定双手、引导动作、零抖动。同一套硬件，无限技能。这只手在你开口之前就知道你需要什么。</p><p style="color:#444;font-size:0.7rem;font-style:italic;margin-top:0.5rem">这就是边缘 AI 的未来方向。KrillClaw 是让这一切成为可能的运行时。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #00ff88">
 <summary>
 <div><span style="color:#00ff88;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🤖 机器人</span><br><span style="color:#fff;font-size:1rem;font-weight:600">能自我修复故障的 3D 打印机</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">Layer adhesion drops on hour 6 of a 10-hour print. KrillClaw reads the temperature sensor, checks the filament spool weight (running low = thinner feed), and adjusts the flow rate mid-print. It texts you: <em style="color:#aaa">"Print 80% done. Compensated for low spool — increased flow rate 5%. Should finish clean by 2am."</em> You wake up to a perfect part instead of spaghetti.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">10 小时打印任务进行到第 6 小时，层间附着力下降。KrillClaw 读取温度传感器，检查耗材卷轴重量（余量不足意味着进料变细），在打印过程中调整流量。它给你发消息：<em style="color:#aaa">"打印完成 80%。已补偿耗材不足——流量提高 5%。预计凌晨 2 点完美完成。"</em> 你醒来看到的是完美的零件，而不是一团面条。</p></div>
 </details>
 
 </div>
@@ -299,7 +299,7 @@ context.zig  — token management (225 lines)</pre>
 
 <div class="section">
 <h2>改造一切，面向未来。</h2>
-<p style="color:#888;margin-bottom:1rem">You already own incredible hardware. The electronics inside just never had a brain. A $3 KrillClaw chip and a WiFi connection brings the world's most capable AI models to any device — analyzing data, reacting in real time, taking initiative, running recurring actions. No replacement required.</p>
+<p style="color:#888;margin-bottom:1rem">你已经拥有了出色的硬件。只是里面的电子元件从来没有大脑。一颗 $3 的 KrillClaw 芯片加上 WiFi 连接，就能把世界上最强的 AI 模型带到任何设备上——分析数据、实时响应、主动决策、执行周期任务。无需更换设备。</p>
 <p style="color:#00ff88;font-size:0.9rem;margin-bottom:2rem">升级大脑，而不是机器。</p>
 
 <div style="display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:800px">
@@ -308,28 +308,28 @@ context.zig  — token management (225 lines)</pre>
 <summary>
 <div><span style="color:#ffcc00;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🚗 汽车</span><br><span style="color:#fff;font-size:1rem;font-weight:600">你的 2018 款车变成 2026 款</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">Your car's OBD-II port speaks data — but the car's own computer was frozen in time the day it shipped. Plug in a $3 ESP32 with KrillClaw. Now it reads engine codes, cross-references them with repair databases, monitors fuel efficiency trends, and texts you: <em style="color:#aaa">"Your fuel economy dropped 8% this month — likely the air filter based on mileage. $12 part, 5-minute swap. Want me to order one?"</em> A new car with these smarts costs $45K. This costs $3.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">你车上的 OBD-II 接口能输出数据——但车载电脑从出厂那天起就再没更新过。插入一颗搭载 KrillClaw 的 $3 ESP32，它就能读取发动机故障码、交叉比对维修数据库、监控油耗趋势，然后给你发消息：<em style="color:#aaa">"这个月油耗上升了 8%——根据里程判断大概率是空气滤芯的问题。$12 的零件，5 分钟换好。要帮你下单吗？"</em> 一辆具备这种智能的新车要 $45K。这个只要 $3。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #ffcc00">
 <summary>
 <div><span style="color:#ffcc00;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🏋️ 健身</span><br><span style="color:#fff;font-size:1rem;font-weight:600">你的健身车获得真正的教练</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">Your exercise bike has sensors for cadence, resistance, and heart rate — but its software is whatever the manufacturer shipped. Clip a KrillClaw node onto it. Now it reads your real-time performance, compares it to your training history, and adjusts coaching in context: <em style="color:#aaa">"Your power output is down 15% from Tuesday — you might be under-recovered. Switching to an endurance zone ride instead of intervals today."</em> A new smart bike with AI coaching: $3,000+. Retrofitting yours: $3.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">你的健身车有踏频、阻力和心率传感器——但软件还是厂家出厂时的版本。夹上一个 KrillClaw 节点，它就能读取你的实时表现，对比训练历史，并根据状态调整指导方案：<em style="color:#aaa">"你的功率输出比周二下降了 15%——可能恢复不够充分。今天改为耐力区间骑行，不做间歇训练了。"</em> 一辆带 AI 教练的智能健身车：$3,000+。改造你现有的：$3。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #ffcc00">
 <summary>
 <div><span style="color:#ffcc00;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🏭 工业</span><br><span style="color:#fff;font-size:1rem;font-weight:600">$50K 的 CNC 机床只需 $3 即可获得预测性维护</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">Your CNC machine cost $50K but its controller is from 2015. Industrial predictive maintenance platforms cost $20K/year. Wire a KrillClaw chip to the vibration sensor and spindle temperature probe. It builds a baseline, detects anomalies, correlates with the maintenance log in flash memory, and messages the floor supervisor before things break. <em style="color:#aaa">"Spindle bearing vibration trending up 12% since Monday — similar to the pattern before the October replacement. Recommend inspection within 48 hours."</em> New CNC with smart diagnostics: $80K. Retrofitting: $3.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">你的 CNC 机床花了 $50K，但控制器还是 2015 年的。工业预测性维护平台每年要 $20K。把一颗 KrillClaw 芯片接到振动传感器和主轴温度探头上，它会建立基线、检测异常、关联闪存中的维护日志，在故障发生前通知车间主管：<em style="color:#aaa">"主轴轴承振动自周一以来上升 12%——与十月份更换前的模式相似。建议 48 小时内检查。"</em> 带智能诊断的新 CNC：$80K。改造现有的：$3。</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #ffcc00">
 <summary>
 <div><span style="color:#ffcc00;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🏠 家居</span><br><span style="color:#fff;font-size:1rem;font-weight:600">你的"傻"家电真正变聪明</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">Your washer, dryer, pool pump, HVAC, water heater — all have sensors and control interfaces. None of them talk to each other or think for themselves. A KrillClaw chip on each one, connected to your home WiFi, and suddenly your house has a nervous system. The HVAC knows the dryer is about to dump heat and pre-adjusts. The pool pump shifts to off-peak rates. The water heater pre-heats before your usual shower time. A "smart home" retrofit from a contractor: $5K-15K. Doing it yourself with KrillClaw: $20 in chips.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">你的洗衣机、烘干机、泳池水泵、暖通空调、热水器——都有传感器和控制接口，但它们互不通信，也不会自主思考。每个设备装一颗 KrillClaw 芯片，连上家里的 WiFi，你的房子就有了神经系统。暖通空调知道烘干机即将排出热量，提前调节；泳池水泵自动切换到低峰电价时段；热水器在你平时洗澡前提前预热。请承包商做"智能家居"改造：$5K-15K。用 KrillClaw 自己动手：$20 的芯片搞定。</p></div>
 </details>
 
 </div>
@@ -345,8 +345,8 @@ context.zig  — token management (225 lines)</pre>
 <div class="pill-switcher">
 <div class="pill-track">
 <button class="pill-btn active" data-tab="0">开发板</button>
-<button class="pill-btn" data-tab="1">IoT</button>
-<button class="pill-btn" data-tab="2">Robotics</button>
+<button class="pill-btn" data-tab="1">物联网</button>
+<button class="pill-btn" data-tab="2">机器人</button>
 </div>
 </div>
 
@@ -382,7 +382,7 @@ context.zig  — token management (225 lines)</pre>
 
 </div>
 </div>
-<p class="swipe-hint">← swipe to explore →</p>
+<p class="swipe-hint">← 滑动浏览 →</p>
 </div>
 </div>
 
@@ -403,7 +403,7 @@ context.zig  — token management (225 lines)</pre>
 <div style="display:flex;flex-direction:column;gap:0.6rem" id="wl-options">
 <label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
 <input type="radio" name="usecase" value="tinker" style="accent-color:#00ff88;width:16px;height:16px">
-<span style="font-size:0.85rem">🔧 我想探索和尝试各种可能's possible</span>
+<span style="font-size:0.85rem">🔧 我想探索各种可能性</span>
 </label>
 <label style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1rem;background:#0a0a0a;border:1px solid #222;border-radius:10px;cursor:pointer;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88'" onmouseout="if(!this.querySelector('input').checked)this.style.borderColor='#222'">
 <input type="radio" name="usecase" value="kids" style="accent-color:#00ff88;width:16px;height:16px">
@@ -428,7 +428,7 @@ context.zig  — token management (225 lines)</pre>
 <!-- Step 2: Email -->
 <div id="wl-step2" style="display:none">
 <h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">即将完成！</h3>
-<p style="color:#888;font-size:0.8rem;margin-bottom:1.5rem">留下你的邮箱，我们'll ping you when devices are ready.</p>
+<p style="color:#888;font-size:0.8rem;margin-bottom:1.5rem">留下你的邮箱，设备准备好后我们会通知你。</p>
 <input type="email" id="wl-email" placeholder="your@email.com" required style="width:100%;padding:0.75rem 1rem;background:#0a0a0a;border:1px solid #333;border-radius:8px;color:#fff;font-family:inherit;font-size:0.9rem;margin-bottom:1rem">
 <button id="wl-submit" onclick="wlSubmit()" style="width:100%;padding:0.75rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:0.9rem">注册 🦐</button>
 <p style="color:#444;font-size:0.7rem;margin-top:0.75rem;text-align:center">我们会发送验证链接。绝不发垃圾邮件。</p>
@@ -438,8 +438,8 @@ context.zig  — token management (225 lines)</pre>
 <div id="wl-step3" style="display:none;text-align:center;padding:1rem 0">
 <p style="font-size:2rem;margin-bottom:0.75rem">🦐</p>
 <h3 style="color:#00ff88;margin-bottom:0.5rem;font-size:1.1rem">请查看你的邮箱！</h3>
-<p style="color:#888;font-size:0.85rem">We sent a verification link to <strong id="wl-email-display" style="color:#fff"></strong>. Click it to confirm your spot.</p>
-<button onclick="document.getElementById('waitlist-dialog').close()" style="margin-top:1.5rem;padding:0.5rem 1.5rem;background:transparent;border:1px solid #333;border-radius:8px;color:#888;cursor:pointer;font-family:inherit;font-size:0.85rem">Close</button>
+<p style="color:#888;font-size:0.85rem">我们已发送验证链接到 <strong id="wl-email-display" style="color:#fff"></strong>。点击确认你的位置。</p>
+<button onclick="document.getElementById('waitlist-dialog').close()" style="margin-top:1.5rem;padding:0.5rem 1.5rem;background:transparent;border:1px solid #333;border-radius:8px;color:#888;cursor:pointer;font-family:inherit;font-size:0.85rem">关闭</button>
 </div>
 
 </div>
@@ -447,7 +447,7 @@ context.zig  — token management (225 lines)</pre>
 
 <div class="section" style="text-align:center">
 <h2>从 GitHub 开始</h2>
-<pre class="install" style="text-align:left">git clone https://github.com/yoctoclaw/KrillClaw  # coming soon
+<pre class="install" style="text-align:left">git clone https://github.com/yoctoclaw/KrillClaw
 cd KrillClaw
 zig build -Doptimize=ReleaseSmall
 ./zig-out/bin/krillclaw "monitor sensors and alert on anomalies"</pre>
@@ -460,7 +460,7 @@ zig build -Doptimize=ReleaseSmall
 
 
 <footer>
-由 <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · 专利申请中<br style="margin-top:0.5rem"><a href="privacy.html" style="color:#555">Privacy</a> · <a href="terms.html" style="color:#555">Terms</a> · <a href="#" onclick="return false" title="Coming soon">源码规模</a>
+由 <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · 专利申请中<br style="margin-top:0.5rem"><a href="privacy.html" style="color:#555">隐私政策</a> · <a href="terms.html" style="color:#555">使用条款</a> · <a href="#" onclick="return false" title="Coming soon">源码规模</a>
 </footer>
 
 <script type="application/ld+json">
@@ -468,7 +468,7 @@ zig build -Doptimize=ReleaseSmall
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "KrillClaw™",
-  "description": "KrillClaw™ — 最小的边缘设备 AI 智能体运行时。 180KB binary, zero dependencies, written in Zig. Runs on a $3 ESP32.",
+  "description": "KrillClaw™ — 最小的边缘设备 AI 智能体运行时。 180KB 二进制文件，零依赖，用 Zig 编写。运行在 $3 ESP32 上。",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Linux, macOS, Embedded",
   "offers": {
@@ -547,7 +547,7 @@ zig build -Doptimize=ReleaseSmall
       nextBtn.style.background = '#00ff88';
       nextBtn.style.color = '#0a0a0a';
       nextBtn.style.cursor = 'pointer';
-      nextBtn.textContent = 'Continue →';
+      nextBtn.textContent = '继续 →';
       labels.forEach(function(l){ l.style.borderColor = '#222'; });
       r.closest('label').style.borderColor = '#00ff88';
     });
