@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YoctoClaw — Every Device Gets an AI Brain</title>
-<meta name="description" content="YoctoClaw is the smallest AI agent runtime for edge devices. 180KB binary in Zig. Zero dependencies. Runs on a $3 ESP32 — no OS required. Works with any OpenAI-compatible LLM.">
-<meta name="keywords" content="edge AI, agent runtime, Zig, embedded AI, IoT, ESP32, microcontroller, LLM, Claude, OpenAI, Ollama, BLE, minimal, lightweight, zero dependencies">
-<meta property="og:title" content="YoctoClaw — The Smallest Edge AI Agent Runtime">
-<meta property="og:description" content="180KB AI agent runtime for edge devices. Zero dependencies. Runs on a $3 chip — no OS required.">
+<meta name="description" content="YoctoClaw is a full coding agent in ~3,500 lines of Zig. 180KB binary. Zero dependencies. Targets everything from $3 chips to wearables. Works with Claude, OpenAI, and Ollama.">
+<meta name="keywords" content="coding agent, Zig, AI, LLM, embedded, IoT, Claude, OpenAI, Ollama, BLE, minimal, lightweight, zero dependencies">
+<meta property="og:title" content="YoctoClaw — The World's Smallest Coding Agent">
+<meta property="og:description" content="Full coding agent in 180KB. Zero dependencies. Runs on embedded devices. ~3,500 lines of Zig.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://yoctoclaw.github.io">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="YoctoClaw — 180KB Edge AI Runtime">
-<meta name="twitter:description" content="The smallest AI agent runtime. 180KB. Zero deps. Runs on a $3 ESP32. Works with any LLM.">
+<meta name="twitter:title" content="YoctoClaw — 180KB Coding Agent">
+<meta name="twitter:description" content="Full coding agent in ~3,500 lines of Zig. Works with Claude, OpenAI, Ollama. Runs on a $3 chip.">
 <link rel="canonical" href="https://yoctoclaw.github.io">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -89,10 +89,9 @@ a:hover{text-decoration:underline}
 
 <div class="hero">
 <h1>Every device gets an AI brain.</h1>
-<p class="tagline">The smallest AI agent runtime for edge devices.</p>
+<p class="tagline">YoctoClaw: the agent runtime that fits on a $3 chip.</p>
 <p class="size">180KB</p>
-<p style="color:#888;margin-bottom:0.5rem">Zero dependencies · No OS required · Any LLM provider</p>
-<p style="color:#666;font-size:0.9rem;margin-top:0.5rem">Runs on a $3 ESP32. Written in Zig.</p>
+<p style="color:#888;margin-bottom:0.5rem">Zero dependencies. From dev boards to factory floors.</p>
 
 <div class="marquee-section">
 <div class="marquee-row scroll-left">
@@ -114,27 +113,23 @@ export ANTHROPIC_API_KEY=...
 ./yoctoclaw "fix the bug"</pre>
 <a href="#" onclick="return false" title="Coming soon" class="cta">★ Star on GitHub</a>
 <a href="#" onclick="return false" title="Coming soon" class="cta secondary">View Source</a>
-<br><a href="#waitlist" class="cta" style="background:#ff6600;margin-top:1rem" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'});return false">🦐 I Want One!</a>
 </div>
 
 <div class="section">
 <h2>How it compares</h2>
-<p style="color:#888;margin-bottom:1rem;font-size:0.85rem">Embedded AI agent runtimes — a new category.</p>
 <table>
-<tr><th></th><th>YoctoClaw</th><th>MimiClaw</th><th>PicoClaw</th><th>OpenClaw</th></tr>
-<tr><td>Language</td><td class="highlight">Zig</td><td>C</td><td>Go</td><td>Node.js</td></tr>
-<tr><td>Binary size</td><td class="highlight">180 KB</td><td>~2 MB</td><td>~8 MB</td><td>~200 MB</td></tr>
-<tr><td>RAM usage</td><td class="highlight">2 MB</td><td>~512 KB*</td><td>~10 MB</td><td>~200 MB</td></tr>
-<tr><td>Source</td><td class="highlight">~3,500 LOC</td><td>~7K LOC</td><td>?</td><td>~40K LOC</td></tr>
-<tr><td>Dependencies</td><td class="highlight">0</td><td>ESP-IDF</td><td>Go stdlib</td><td>~108 npm</td></tr>
-<tr><td>Target hardware</td><td class="highlight">$3 ESP32+</td><td>$5 ESP32-S3</td><td>$10 LicheeRV</td><td>Pi / VPS / Mac</td></tr>
-<tr><td>Needs OS?</td><td class="highlight">No</td><td class="highlight">No</td><td>Linux</td><td>Linux / macOS</td></tr>
-<tr><td>Memory safety</td><td class="highlight">Yes (Zig)</td><td>No (C)</td><td>Yes (Go GC)</td><td>Yes (JS)</td></tr>
-<tr><td>LLM providers</td><td class="highlight">Any compatible</td><td>Claude + OpenAI</td><td>?</td><td>Multi</td></tr>
+<tr><th></th><th>YoctoClaw</th><th>Claude Code</th><th>Cursor</th><th>Aider</th></tr>
+<tr><td>Install size</td><td class="highlight">180 KB</td><td>91 MB</td><td>~300 MB</td><td>~50 MB</td></tr>
+<tr><td>RAM</td><td class="highlight">2 MB</td><td>~200 MB</td><td>~1 GB</td><td>~150 MB</td></tr>
+<tr><td>Source</td><td class="highlight">~3,500 LOC</td><td>?</td><td>?</td><td>~40K LOC</td></tr>
+<tr><td>Dependencies</td><td class="highlight">0</td><td>bundled</td><td>?</td><td>~108 pip</td></tr>
+<tr><td>Boot</td><td class="highlight">&lt;10 ms</td><td>~400 ms</td><td>~5,000 ms</td><td>~3,000 ms</td></tr>
+<tr><td>Tools</td><td>7</td><td>20+</td><td>IDE-integrated</td><td>15+</td></tr>
 <tr><td>BLE transport</td><td class="highlight">Yes</td><td>No</td><td>No</td><td>No</td></tr>
-<tr><td>License</td><td class="highlight">MIT</td><td>MIT</td><td>MIT</td><td>MIT</td></tr>
+<tr><td>Embedded target</td><td class="highlight">Yes</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>License</td><td class="highlight">MIT</td><td>Proprietary</td><td>Proprietary</td><td>Apache 2.0</td></tr>
 </table>
-<p style="color:#555;font-size:0.7rem;margin-top:0.5rem">* ESP32-S3 has 512KB SRAM total. Different species from desktop coding tools like Claude Code or Cursor.</p>
+<p style="color:#555;font-size:0.7rem;margin-top:0.5rem">Comparing footprint, not capability. YoctoClaw is intentionally minimal — it delegates intelligence to the LLM.</p>
 </div>
 
 <div class="section">
@@ -220,17 +215,6 @@ zig build -Doptimize=ReleaseSmall
 
 </div>
 
-
-<div class="section" id="waitlist-section" style="text-align:center;padding:3rem 0">
-<h2>🦐 Want a pre-loaded device?</h2>
-<p style="color:#888;margin-bottom:1.5rem">We're exploring shipping ESP32 boards with YoctoClaw pre-flashed.<br>Drop your email and we'll let you know when they're ready.</p>
-<form style="max-width:400px;margin:0 auto;display:flex;gap:0.5rem" onsubmit="event.preventDefault();this.querySelector('button').textContent='Added!';this.querySelector('button').style.background='#00cc6a'">
-<input type="email" placeholder="your@email.com" required style="flex:1;padding:0.75rem 1rem;background:#111;border:1px solid #333;border-radius:8px;color:#fff;font-family:inherit;font-size:0.9rem">
-<button type="submit" style="padding:0.75rem 1.5rem;background:#00ff88;color:#0a0a0a;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-family:inherit;font-size:0.9rem;white-space:nowrap">I Want One!</button>
-</form>
-<p style="color:#444;font-size:0.7rem;margin-top:1rem">No spam. Just a ping when hardware ships.</p>
-</div>
-
 <footer>
 Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · <a href="#" onclick="return false" title="Coming soon">Source</a>
 </footer>
@@ -240,7 +224,7 @@ Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · <
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "YoctoClaw",
-  "description": "The smallest AI agent runtime for edge devices. 180KB binary, zero dependencies, written in Zig. Runs on a $3 ESP32.",
+  "description": "Every device gets an AI brain. Full autonomous AI agent in 180KB with zero dependencies. Written in Zig.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Linux, macOS, Embedded",
   "offers": {
