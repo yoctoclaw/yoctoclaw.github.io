@@ -125,7 +125,7 @@ dialog{animation:dialogIn 0.2s ease}
 
 <pre class="install">zig build -Doptimize=ReleaseSmall
 export ANTHROPIC_API_KEY=...
-./krillclaw "fix the bug"</pre>
+./krillclaw "read the temperature and adjust the fan"</pre>
 <a href="#" onclick="return false" title="Coming soon" class="cta">★ Star on GitHub</a>
 <a href="#" onclick="return false" title="Coming soon" class="cta secondary">View Source</a>
 <br><a href="#waitlist" class="cta" style="background:#ff6600;margin-top:1rem" onclick="document.getElementById('waitlist-section').scrollIntoView({behavior:'smooth'});return false">🦐 I Want One!</a>
@@ -223,7 +223,7 @@ export ANTHROPIC_API_KEY=...
 </div>
 
 <div class="section">
-<h2>16 files. ~3,500 lines. That's it.</h2>
+<h2>16 files. ~3,500 lines. The entire runtime.</h2>
 <p style="color:#888;margin-bottom:1.5rem">You can read the entire codebase in an hour.</p>
 <pre class="install" style="max-width:500px">agent.zig    — core loop (250 lines)
 api.zig      — multi-provider HTTP (329 lines)
@@ -231,7 +231,7 @@ stream.zig   — SSE parser (344 lines)
 json.zig     — hand-rolled JSON (500 lines)
 tools_coding.zig — 7 tools (280 lines)
 context.zig  — token management (225 lines)</pre>
-<p style="color:#888;margin-top:1rem">Works with any OpenAI-compatible LLM. Switch providers with a flag.</p>
+<p style="color:#888;margin-top:1rem">Works with any OpenAI-compatible LLM provider. Switch with a flag.</p>
 </div>
 
 <div class="section">
@@ -272,7 +272,7 @@ context.zig  — token management (225 lines)</pre>
 <summary>
 <div><span style="color:#00ff88;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.05em">🤖 Robotics</span><br><span style="color:#fff;font-size:1rem;font-weight:600">A bionic hand that downloads skills on demand</span></div>
 </summary>
-<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">A prosthetic hand with KrillClaw embedded. It reads context from sensors and a wrist camera, then downloads fine-motor skill profiles from the cloud in real time. Picking up chopsticks for the first time? It loads a precision-grip pattern. Need to do a card trick at a party? Shuffling dexterity profile, downloaded in seconds. A medic on a battlefield needs to perform an emergency procedure on a fellow soldier? Surgical-assist mode — steady hands, guided movements, zero tremor. Same hardware. Infinite skills. The hand learns what you need before you ask.</p></div>
+<div class="card-body"><p style="color:#888;font-size:0.9rem;line-height:1.7">A prosthetic hand with KrillClaw embedded. It reads context from sensors and a wrist camera, then downloads fine-motor skill profiles from the cloud in real time. Picking up chopsticks for the first time? It loads a precision-grip pattern. Need to do a card trick at a party? Shuffling dexterity profile, downloaded in seconds. A medic on a battlefield needs to perform an emergency procedure on a fellow soldier? Surgical-assist mode — steady hands, guided movements, zero tremor. Same hardware. Infinite skills. The hand learns what you need before you ask.</p><p style="color:#444;font-size:0.7rem;font-style:italic;margin-top:0.5rem">This is where edge AI is heading. KrillClaw is the runtime that makes it possible.</p></div>
 </details>
 
 <details class="usecase-card" style="border-left:3px solid #00ff88">
@@ -440,7 +440,7 @@ context.zig  — token management (225 lines)</pre>
 <pre class="install" style="text-align:left">git clone https://github.com/krillclaw/TinyDancer  # coming soon
 cd TinyDancer
 zig build -Doptimize=ReleaseSmall
-./zig-out/bin/krillclaw "create a REST API with auth"</pre>
+./zig-out/bin/krillclaw "monitor sensors and alert on anomalies"</pre>
 <p style="margin-top:2rem">
 <a href="#" onclick="return false" title="Coming soon" class="cta">★ Star on GitHub</a>
 </p>
