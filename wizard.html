@@ -12,11 +12,11 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 
 /* Header with krill art */
 .wizard-header{background:linear-gradient(135deg,#0a1a0f,#0a0a0a);padding:2rem;text-align:center;border-bottom:1px solid #1a1a1a;position:relative;overflow:hidden}
-.wizard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,#00ff8808,transparent 50%),radial-gradient(circle at 70% 30%,#00aaff05,transparent 40%);pointer-events:none}
+.wizard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,#00ff8810,transparent 50%),radial-gradient(circle at 70% 30%,#00aaff08,transparent 40%);pointer-events:none}
 
 /* Pixel art krill */
-.krill-pixel{display:inline-grid;grid-template-columns:repeat(20,6px);grid-template-rows:repeat(12,6px);gap:1px;margin-bottom:1rem;opacity:0.95}
-.krill-pixel span{border-radius:1px}
+.krill-pixel{display:inline-grid;grid-template-columns:repeat(24,8px);gap:1px;margin-bottom:1rem;filter:drop-shadow(0 0 8px #00ff8840)}
+.krill-pixel span{width:8px;height:8px;border-radius:1px;display:block}
 
 .wizard-header h1{font-size:1.3rem;color:#00ff88;margin-bottom:0.25rem;position:relative}
 .wizard-header .tm{font-size:0.7rem;vertical-align:super}
@@ -43,7 +43,6 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}option{color:#fff;background:#0a0a0a;font-weight:normal}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.8rem center}
 .field .hint{color:#444;font-size:0.7rem;margin-top:0.3rem}
-.field .model-sub{color:#555;font-size:0.7rem;margin-top:0.2rem;padding-left:0.2rem}
 
 /* Profile cards */
 .profiles{display:flex;flex-direction:column;gap:0.6rem}
@@ -162,30 +161,34 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 <select id="llm-provider" onchange="updateProviderUI()">
 <option value="">Select provider...</option>
 <optgroup label="☁️ Cloud Providers">
-<option value="openai">OpenAI — GPT-4o, GPT-4, GPT-3.5</option>
-<option value="anthropic">Anthropic — Claude 4, Claude 3.5 Sonnet, Claude 3 Haiku</option>
-<option value="google">Google — Gemini 2.5 Pro, Gemini 2.5 Flash</option>
-<option value="mistral">Mistral — Mistral Large, Mistral Medium, Codestral</option>
-<option value="deepseek">DeepSeek — DeepSeek V3, DeepSeek Coder</option>
-<option value="cohere">Cohere — Command R+</option>
-<option value="groq">Groq — Llama 3 70B, Mixtral</option>
-<option value="cerebras">Cerebras — ultra-fast inference</option>
-<option value="siliconflow">SiliconFlow</option>
-<option value="azure">Azure OpenAI</option>
-<option value="bedrock">AWS Bedrock</option>
-<option value="vertex">Google Vertex AI</option>
+<option value="openai">OpenAI — GPT-4o, GPT-4, o1, o3</option>
+<option value="anthropic">Anthropic — Claude 4 Opus, Claude 3.5 Sonnet, Claude 3 Haiku</option>
+<option value="google">Google Vertex AI — Gemini 2.5 Pro, Gemini 2.5 Flash</option>
+<option value="bedrock">Amazon Bedrock — Claude, Llama, Mistral via AWS</option>
+<option value="nvidia">NVIDIA NIM — NIM API inference</option>
+<option value="venice">Venice AI</option>
 </optgroup>
-<optgroup label="🏠 Open Source / Local">
-<option value="ollama">Ollama (Local) — Llama 3, Mistral, Phi-3, CodeLlama</option>
-<option value="vllm">vLLM (self-hosted)</option>
+<optgroup label="🇨🇳 Chinese Providers">
+<option value="moonshot">Moonshot / Kimi — Moonshot v1, Kimi</option>
+<option value="minimax">MiniMax — abab models</option>
+<option value="glm">GLM / Zhipu AI — GLM-4, GLM-5</option>
+<option value="qwen">Qwen / Alibaba — Qwen 2.5, Qwen-Max</option>
+<option value="qianfan">Qianfan / Baidu — ERNIE</option>
+<option value="xiaomi">Xiaomi — MiLM</option>
 </optgroup>
-<optgroup label="🔀 Aggregators">
-<option value="openrouter">OpenRouter — access to 100+ models</option>
+<optgroup label="🏠 Local / Self-Hosted">
+<option value="ollama">Ollama — Llama 3, Mistral, Phi-3, CodeLlama (local)</option>
+<option value="vllm">vLLM — self-hosted inference</option>
+</optgroup>
+<optgroup label="🔀 Aggregators & Gateways">
+<option value="openrouter">OpenRouter — 100+ models</option>
+<option value="litellm">LiteLLM — universal proxy</option>
 <option value="together">Together AI</option>
-<option value="fireworks">Fireworks AI</option>
-<option value="deepinfra">DeepInfra</option>
 <option value="huggingface">Hugging Face Inference</option>
-<option value="litellm">LiteLLM (universal proxy)</option>
+<option value="copilot">GitHub Copilot</option>
+<option value="cloudflare">Cloudflare AI Gateway</option>
+<option value="vercel">Vercel AI Gateway</option>
+<option value="zai">ZAI</option>
 </optgroup>
 <optgroup label="⚙️ Custom">
 <option value="custom">Any OpenAI-compatible endpoint (custom URL)</option>
@@ -268,31 +271,32 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 </div>
 
 <script>
-// Pixel art krill - 20x12 grid
-// Colors: 0=transparent, g=#00ff88, o=#ff6600, b=#00aaff, d=#006644, w=#ffffff
+// Pixel art krill - 24x14 grid, much more detailed
+// Colors: 0=transparent, g=#00ff88, G=#00cc66, o=#ff6600, O=#cc5500, b=#00aaff, B=#0088cc, w=#ffffff, d=#006644
 (function(){
 var rows=[
-  '00000000gggg00000000',
-  '000000gg00oogo000000',
-  '00000g00wo000og00000',
-  '0000gooo0000000g0000',
-  '000g00gggggg0000gb00',
-  '00g00g0000og00gbb000',
-  '00g0g000000ggg00000b',
-  '000gg0000ggg00000b00',
-  '0000gggggg0000000000',
-  '000000g0g0g000000000',
-  '00000g00g00g00000000',
-  '0000g000g000g0000000',
+  '000000000000gggg00000000',
+  '0000000000ggGGGGgg000000',
+  '000000000gGwwGGGooog0000',
+  '00000000gGGGGGGGGooGg000',
+  '0000000gGoGGGGGGGGGGgb00',
+  '000000gGGGggggggGGGGgbb0',
+  '00000gGGgg0000ooggGgbb00',
+  '0000gGGg0000000gggbb000b',
+  '00000gGgg00000ggb0000b00',
+  '000000ggGGggggG000000000',
+  '00000000gGgGgGg000000000',
+  '0000000gG0gG0gG00000000',
+  '000000gG00gG00gG0000000',
+  '00000g0000g0000g00000000',
 ];
-var colors={g:'#00ff88',o:'#ff6600',b:'#00aaff',d:'#006644',w:'#ffffff'};
+var colors={g:'#00ff88',G:'#00cc66',o:'#ff6600',O:'#cc5500',b:'#00aaff',B:'#0088cc',w:'#ffffff',d:'#006644'};
 var el=document.getElementById('krill-art');
 for(var r=0;r<rows.length;r++){
-  for(var c=0;c<rows[r].length;c++){
+  for(var c=0;c<24;c++){
     var px=document.createElement('span');
-    var ch=rows[r][c];
+    var ch=rows[r][c]||'0';
     px.style.background=colors[ch]||'transparent';
-    px.style.width='6px';px.style.height='6px';px.style.display='inline-block';
     el.appendChild(px);
   }
 }
@@ -327,7 +331,7 @@ function selectWifi(el,name){
 function updateProviderUI(){
   var v=document.getElementById('llm-provider').value;
   var selfHosted=['ollama','vllm'];
-  var needsEndpoint=['ollama','vllm','litellm','custom','azure','bedrock','vertex'];
+  var needsEndpoint=['ollama','vllm','litellm','custom','bedrock','cloudflare','vercel'];
   document.getElementById('api-key-field').style.display=(v&&selfHosted.indexOf(v)===-1)?'block':'none';
   document.getElementById('endpoint-field').style.display=(needsEndpoint.indexOf(v)!==-1)?'block':'none';
 }
