@@ -205,7 +205,8 @@ export ANTHROPIC_API_KEY=...
 <div class="section" id="profiles">
 <div style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:#00ff88;margin-bottom:8px">Architecture</div>
 <h2>Two Profiles. <span style="color:#00ff88">Every Use Case.</span></h2>
-<p style="color:#888;margin-bottom:3rem;font-size:0.9rem">Choose the right build for your device.</p>
+<p style="color:#888;margin-bottom:1.5rem;font-size:0.9rem">Choose the right build for your device.</p>
+<p style="color:#ffcc00;font-size:0.8rem;margin-bottom:3rem;padding:0.75rem 1rem;border:1px solid #ffcc0033;border-radius:8px;background:#ffcc0008">💡 <strong>Lite and Full are independent builds.</strong> Use either one alone, or combine them in a fleet. Full does not require Lite.</p>
 
 <!-- Architecture Diagram -->
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:4rem">
@@ -269,7 +270,7 @@ export ANTHROPIC_API_KEY=...
 <div style="font-size:3rem;font-weight:bold;color:#00ff88;margin-bottom:0.25rem">180KB</div>
 <div style="font-size:0.85rem;color:#00ff88;margin-bottom:1rem">BLE / Serial</div>
 <div style="color:#888;font-size:0.8rem;line-height:2">No WiFi needed · No API keys on device · Ultra-low power (~10mA) · $3 ESP32-C3</div>
-<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #1a1a1a;color:#666;font-size:0.75rem"><strong style="color:#00ff88">Best for:</strong> wearables, vehicles, body-worn, battery-powered, anything near a phone</div>
+<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #1a1a1a;color:#666;font-size:0.75rem"><strong style="color:#00ff88">Best for:</strong> wearables, vehicles, body-worn, battery-powered, anything near a BLE gateway (phone, Pi, laptop)</div>
 </div>
 <div style="background:#111;border:1px solid #ff883344;border-radius:12px;padding:2rem">
 <div style="font-size:3rem;font-weight:bold;color:#ff8833;margin-bottom:0.25rem">≤500KB</div>
@@ -293,10 +294,10 @@ export ANTHROPIC_API_KEY=...
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Tool execution</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ local tools</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ full toolset</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Persistent memory</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ flash</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ flash + filesystem</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Config management</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
-<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">LLM API calls</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="Handled by phone — not a limitation">via phone ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ direct</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">LLM API calls</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="Handled by a nearby BLE gateway — not a limitation">via BLE gateway ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ direct</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">TLS / HTTPS</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="BLE link is local — no TLS required">not needed ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">GPIO / sensors</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ direct</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
-<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">API key on device</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="Key stays on phone/gateway — never on edge device">❌ secure! ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ required</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">API key on device</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="Key stays on the BLE gateway — never on edge device">❌ secure! ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ required</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Power draw</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">~10 mA</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">~100 mA</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Min hardware</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">$3 ESP32-C3</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">$5 ESP32-S3 / Pi</td></tr>
 <tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Offline capable</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ local ops</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ queues calls</td></tr>
@@ -322,15 +323,15 @@ export ANTHROPIC_API_KEY=...
 </div>
 <div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🧸 Toys</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">LITE</span></div>
-<div style="font-size:0.7rem;color:#888">No API keys on device — phone handles the cloud connection</div>
+<div style="font-size:0.7rem;color:#888">No API keys on device — gateway (phone, tablet, or Pi) handles the cloud</div>
 </div>
 <div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🦾 Prosthetics</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">LITE</span></div>
-<div style="font-size:0.7rem;color:#888">Ultra-low latency local tools, phone relays LLM</div>
+<div style="font-size:0.7rem;color:#888">Ultra-low latency local tools, nearby gateway relays LLM</div>
 </div>
 <div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🌱 Greenhouse</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#ff883322;color:#ff8833;border:1px solid #ff883344">FULL</span></div>
-<div style="font-size:0.7rem;color:#888">WiFi available — talks to LLM directly</div>
+<div style="font-size:0.7rem;color:#888">WiFi available — talks to LLM directly, no gateway needed</div>
 </div>
 <div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🏠 Smart Fridge</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#ff883322;color:#ff8833;border:1px solid #ff883344">FULL</span></div>
@@ -708,11 +709,11 @@ zig build -Doptimize=ReleaseSmall
 <h2>FAQ</h2>
 <details class="faq-item">
 <summary>Does it need WiFi?</summary>
-<div class="faq-answer"><strong>Lite (180KB):</strong> No. Connects via BLE or serial to a hub (your phone, a Pi, or another KrillClaw node). The hub handles internet access. Your device never needs WiFi credentials or API keys.<br><strong>Full (≤500KB):</strong> Yes. Connects directly to LLM APIs over WiFi/HTTP. Self-contained, no phone needed.</div>
+<div class="faq-answer"><strong>Lite (180KB):</strong> No. Connects via BLE or serial to a nearby gateway — your phone, a Raspberry Pi, a laptop, or any BLE-capable device with internet. The gateway handles LLM API calls. Your device never needs WiFi credentials or API keys.<br><strong>Full (≤500KB):</strong> Yes. Connects directly to LLM APIs over WiFi/HTTP. Self-contained, no phone needed.</div>
 </details>
 <details class="faq-item">
 <summary>What's the difference between Lite and Full?</summary>
-<div class="faq-answer"><strong>Lite</strong> is a 180KB BLE/serial agent that runs on a $3 chip — sensors, actuators, local logic, ReAct reasoning. It talks to your phone for LLM calls. No WiFi, no API keys on device, ultra-low power (~10mA).<br><strong>Full</strong> is a ≤500KB full agent with built-in HTTP/TLS. Runs on ESP32-S3, Raspberry Pi, or any Linux board. Talks directly to any LLM provider. Can also coordinate multiple lite nodes.</div>
+<div class="faq-answer"><strong>Lite</strong> is a 180KB BLE/serial agent that runs on a $3 chip — sensors, actuators, local logic, ReAct reasoning. It talks to a nearby BLE gateway (phone, Pi, laptop) for LLM calls. No WiFi, no API keys on device, ultra-low power (~10mA).<br><strong>Full</strong> is a ≤500KB full agent with built-in HTTP/TLS. Runs on ESP32-S3, Raspberry Pi, or any Linux board. Talks directly to any LLM provider. Can also coordinate multiple lite nodes.</div>
 </details>
 <details class="faq-item">
 <summary>How much does the API cost?</summary>
@@ -731,8 +732,18 @@ zig build -Doptimize=ReleaseSmall
 <div class="faq-answer">The lite profile is 180KB — BLE/serial transport, no HTTP stack, no TLS. That's the real binary for real embedded use. The full profile is ≤500KB because it includes HTTP/TLS for direct LLM API calls. Both are smaller than any competitor.</div>
 </details>
 <details class="faq-item">
+<summary>How does BLE pairing work?</summary>
+<div class="faq-answer">
+<strong>Automatic discovery:</strong> KrillClaw Lite devices advertise automatically on boot — no pairing button needed.<br>
+<strong>One-tap connect:</strong> The KrillClaw Bridge app (phone or desktop) discovers nearby agents and connects in one tap.<br>
+<strong>Secure bonding:</strong> Only authorized devices can connect — secure BLE bonding prevents unauthorized access.<br>
+<strong>Disconnect:</strong> Forget the device in your BLE settings to unpair.<br><br>
+<span style="color:#ffcc00;font-size:0.8rem">⚠️ The KrillClaw Bridge app is currently in development. Early access coming soon — join the waitlist to be first in line.</span>
+</div>
+</details>
+<details class="faq-item">
 <summary>Which profile should I use?</summary>
-<div class="faq-answer"><strong>Use Lite</strong> when: your device is near a phone, you want the smallest binary, you don't want API keys on the device, or you're optimizing for power.<br><strong>Use Full</strong> when: your device needs to work autonomously with no phone nearby, or it's coordinating other lite nodes.</div>
+<div class="faq-answer"><strong>Use Lite</strong> when: your device is near a BLE gateway (phone, Pi, laptop), you want the smallest binary, you don't want API keys on the device, or you're optimizing for power.<br><strong>Use Full</strong> when: your device needs to work autonomously without a nearby BLE gateway, or it's coordinating other lite nodes.</div>
 </details>
 </div>
 
