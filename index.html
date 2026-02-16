@@ -222,12 +222,50 @@ context.zig  — token management (225 lines)</pre>
 </div>
 
 <div class="section">
-<h2>Three profiles, one codebase</h2>
-<p style="color:#888;margin-bottom:1.5rem">Compile-time profiles swap entire tool sets. Only the selected profile ships — zero runtime overhead.</p>
-<pre class="install" style="max-width:650px;font-size:0.9rem"><span style="color:#00ff88">coding</span>     — bash, read/write/edit files, search, list, apply_patch
-<span style="color:#00ff88">iot</span>        — MQTT pub/sub, HTTP requests, key-value store
-<span style="color:#00ff88">robotics</span>   — robot commands, e-stop, telemetry, bounds checking</pre>
-<p style="color:#888;margin-top:1rem">Build with <code style="color:#00ff88">-Dprofile=iot</code> or <code style="color:#00ff88">-Dsandbox=true</code> for restricted execution.</p>
+<h2>What becomes possible</h2>
+<p style="color:#888;margin-bottom:2rem">When every device has an AI brain and WiFi, ordinary things become extraordinary.</p>
+
+<div style="display:grid;grid-template-columns:1fr;gap:2rem;max-width:800px">
+
+<div style="border:1px solid #1a1a1a;border-radius:12px;padding:1.5rem;border-left:3px solid #00aaff">
+<p style="color:#00aaff;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem">🏠 Smart Home</p>
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem">Your fridge manages your groceries</h3>
+<p style="color:#888;font-size:0.9rem;line-height:1.7">A $3 ESP32 inside your fridge watches what gets consumed. It notices you're low on oat milk, checks your Instacart history, and pings you on WhatsApp: <em style="color:#aaa">"You tried that new Greek yogurt last week but didn't reorder — want to go back to your usual Fage, or give it another shot?"</em> It learns your preferences over time. No app. No screen. Just a chip that pays attention.</p>
+</div>
+
+<div style="border:1px solid #1a1a1a;border-radius:12px;padding:1.5rem;border-left:3px solid #00aaff">
+<p style="color:#00aaff;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem">🏠 Smart Home</p>
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem">Your garage door that knows context</h3>
+<p style="color:#888;font-size:0.9rem;line-height:1.7">It's 11pm and the garage door is still open. A dumb sensor sends a notification you'll ignore. A KrillClaw-powered sensor checks the weather forecast (rain coming), knows your car is parked outside, and texts you: <em style="color:#aaa">"Garage is open, rain in 20 min, and the Tesla's in the driveway. Want me to close it?"</em> You reply "yes" and it's done.</p>
+</div>
+
+<div style="border:1px solid #1a1a1a;border-radius:12px;padding:1.5rem;border-left:3px solid #ff8833">
+<p style="color:#ff8833;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem">🌱 IoT &amp; Agriculture</p>
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem">A greenhouse that farms itself</h3>
+<p style="color:#888;font-size:0.9rem;line-height:1.7">Soil moisture drops. Temperature spikes. A traditional sensor triggers a fixed rule. A KrillClaw node reads the sensors, checks the 5-day forecast, recognizes the tomatoes are in flowering stage (needs less water, more heat), and adjusts the irrigation schedule accordingly. It messages you a weekly report: <em style="color:#aaa">"Tomatoes on track for harvest in ~12 days. Reduced watering 15% — soil was retaining more than usual after Tuesday's rain."</em></p>
+</div>
+
+<div style="border:1px solid #1a1a1a;border-radius:12px;padding:1.5rem;border-left:3px solid #ff8833">
+<p style="color:#ff8833;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem">🏭 Industrial</p>
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem">Factory equipment that explains itself</h3>
+<p style="color:#888;font-size:0.9rem;line-height:1.7">A CNC machine's vibration pattern changes subtly. The KrillClaw node on the motor controller notices, cross-references the maintenance log stored in flash, and messages the floor supervisor: <em style="color:#aaa">"Spindle vibration up 12% since Monday — similar to the pattern before the bearing replacement in October. Recommend inspection within 48 hours. Current job will finish fine."</em> Predictive maintenance without a $50K platform.</p>
+</div>
+
+<div style="border:1px solid #1a1a1a;border-radius:12px;padding:1.5rem;border-left:3px solid #00ff88">
+<p style="color:#00ff88;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem">🤖 Robotics</p>
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem">A delivery robot that negotiates obstacles</h3>
+<p style="color:#888;font-size:0.9rem;line-height:1.7">Your warehouse robot encounters a pallet in an unexpected position. Traditional firmware: stop and wait for human. With KrillClaw: the robot describes what it sees to the LLM, gets a reasoning chain back, decides to reroute via aisle 3, and logs the anomaly. If it keeps happening, it messages logistics: <em style="color:#aaa">"Pallet X keeps getting left in aisle 7 after the 3pm shift. Suggesting a new staging area."</em></p>
+</div>
+
+<div style="border:1px solid #1a1a1a;border-radius:12px;padding:1.5rem;border-left:3px solid #00ff88">
+<p style="color:#00ff88;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem">🤖 Robotics</p>
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:0.75rem">A 3D printer that fixes its own failures</h3>
+<p style="color:#888;font-size:0.9rem;line-height:1.7">Layer adhesion drops on hour 6 of a 10-hour print. KrillClaw reads the temperature sensor, checks the filament spool weight (running low = thinner feed), and adjusts the flow rate mid-print. It texts you: <em style="color:#aaa">"Print 80% done. Compensated for low spool — increased flow rate 5%. Should finish clean by 2am."</em> You wake up to a perfect part instead of spaghetti.</p>
+</div>
+
+</div>
+
+<p style="color:#555;font-size:0.8rem;margin-top:2rem;text-align:center">Every example runs on a $3-5 chip over WiFi. The intelligence lives in the cloud. The agency lives on the device.</p>
 </div>
 
 <div class="section">
