@@ -118,7 +118,9 @@ dialog::backdrop{background:rgba(0,0,0,0.7);backdrop-filter:blur(4px)}
 dialog{animation:dialogIn 0.2s ease}
 @keyframes dialogIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
 .swipe-hint{text-align:center;color:#333;font-size:0.7rem;margin-top:0.8rem}
+@keyframes flowDot{0%{left:0;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:calc(100% - 6px);opacity:0}}
 </style>
+<style>@media(max-width:700px){#profiles>div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}</style>
 </head>
 <body>
 <a href="/zh/" style="position:fixed;top:1rem;right:1rem;z-index:999;padding:0.4rem 0.8rem;background:#111;border:1px solid #333;border-radius:6px;color:#888;font-size:0.75rem;text-decoration:none;font-family:inherit;transition:border-color 0.2s" onmouseover="this.style.borderColor='#00ff88';this.style.color='#00ff88'" onmouseout="this.style.borderColor='#333';this.style.color='#888'">中文</a>
@@ -128,6 +130,7 @@ dialog{animation:dialogIn 0.2s ease}
 <img src="assets/hero-banner.jpg" alt="KrillClaw — kawaii shrimp mascot with retro CRT aesthetic" style="width:100%;max-width:700px;border-radius:12px;margin:0 auto 1.5rem;display:block;box-shadow:0 0 60px #ff886620">
 <p class="tagline">The smallest AI agent runtime for edge devices.</p>
 <p class="size">180KB</p>
+<p style="color:#ff8833;font-size:1.3rem;margin-bottom:0.5rem;font-weight:600">hub: ≤500KB</p>
 <p style="color:#888;margin-bottom:0.5rem">Zero dependencies · No OS required · Any LLM provider</p>
 <p style="color:#666;font-size:0.9rem;margin-top:0.5rem">Runs on a $3 ESP32. Written in Zig.</p>
 
@@ -197,13 +200,190 @@ export ANTHROPIC_API_KEY=...
 </div>
 </div>
 
+
+<!-- ═══ Deployment Profiles ═══ -->
+<div class="section" id="profiles">
+<div style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:#00ff88;margin-bottom:8px">Architecture</div>
+<h2>Two Profiles. <span style="color:#00ff88">Every Use Case.</span></h2>
+<p style="color:#888;margin-bottom:3rem;font-size:0.9rem">Choose the right build for your device.</p>
+
+<!-- Architecture Diagram -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:4rem">
+<div style="background:#111;border:1px solid #222;border-radius:12px;padding:2rem 1.5rem;position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:#00ff88"></div>
+<div style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#00ff88;margin-bottom:4px">Profile: Spoke</div>
+<div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1.5rem">BLE / Serial Agent — 180 KB</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:0;padding:1rem 0">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+<div style="width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:#00ff8833;border:1px solid #00ff88">⬡</div>
+<div style="font-size:0.6rem;color:#888;text-align:center">ESP32-C3<br>$3</div>
+</div>
+<div style="position:relative;width:64px;height:2px;margin:0 4px;flex-shrink:0">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;border-radius:1px;background:#00ff88;opacity:0.3"></div>
+<div style="position:absolute;width:6px;height:6px;border-radius:50%;top:-2px;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:flowDot 1.8s ease-in-out infinite"></div>
+<div style="position:absolute;width:6px;height:6px;border-radius:50%;top:-2px;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:flowDot 1.8s ease-in-out infinite 0.9s"></div>
+<div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:0.55rem;color:#888;white-space:nowrap">BLE</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+<div style="width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:#ffffff11;border:1px solid #444">📱</div>
+<div style="font-size:0.6rem;color:#888;text-align:center">Phone / Hub</div>
+</div>
+<div style="position:relative;width:64px;height:2px;margin:0 4px;flex-shrink:0">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;border-radius:1px;background:#00ff88;opacity:0.3"></div>
+<div style="position:absolute;width:6px;height:6px;border-radius:50%;top:-2px;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:flowDot 1.8s ease-in-out infinite 0.3s"></div>
+<div style="position:absolute;width:6px;height:6px;border-radius:50%;top:-2px;background:#00ff88;box-shadow:0 0 6px #00ff88;animation:flowDot 1.8s ease-in-out infinite 1.2s"></div>
+<div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:0.55rem;color:#888;white-space:nowrap">WiFi</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+<div style="width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:#ff6b6b22;border:1px solid #ff6b6b">☁</div>
+<div style="font-size:0.6rem;color:#888;text-align:center">LLM API</div>
+</div>
+</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:12px;padding:2rem 1.5rem;position:relative;overflow:hidden">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;background:#ff8833"></div>
+<div style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#ff8833;margin-bottom:4px">Profile: Hub</div>
+<div style="font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:1.5rem">Full HTTP Agent — ≤500 KB</div>
+<div style="display:flex;align-items:center;justify-content:center;gap:0;padding:1rem 0">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+<div style="width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:#ff883322;border:1px solid #ff8833">⬢</div>
+<div style="font-size:0.6rem;color:#888;text-align:center">ESP32-S3<br>$5</div>
+</div>
+<div style="position:relative;width:140px;height:2px;margin:0 4px;flex-shrink:0">
+<div style="position:absolute;top:0;left:0;right:0;height:2px;border-radius:1px;background:#ff8833;opacity:0.3"></div>
+<div style="position:absolute;width:6px;height:6px;border-radius:50%;top:-2px;background:#ff8833;box-shadow:0 0 6px #ff8833;animation:flowDot 1.8s ease-in-out infinite"></div>
+<div style="position:absolute;width:6px;height:6px;border-radius:50%;top:-2px;background:#ff8833;box-shadow:0 0 6px #ff8833;animation:flowDot 1.8s ease-in-out infinite 0.9s"></div>
+<div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);font-size:0.55rem;color:#888;white-space:nowrap">WiFi / TLS</div>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0">
+<div style="width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:#ff6b6b22;border:1px solid #ff6b6b">☁</div>
+<div style="font-size:0.6rem;color:#888;text-align:center">LLM API</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Profile Cards -->
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:4rem">
+<div style="background:#111;border:1px solid #00ff8844;border-radius:12px;padding:2rem">
+<div style="font-size:3rem;font-weight:bold;color:#00ff88;margin-bottom:0.25rem">180KB</div>
+<div style="font-size:0.85rem;color:#00ff88;margin-bottom:1rem">BLE / Serial</div>
+<div style="color:#888;font-size:0.8rem;line-height:2">No WiFi needed · No API keys on device · Ultra-low power (~10mA) · $3 ESP32-C3</div>
+<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #1a1a1a;color:#666;font-size:0.75rem"><strong style="color:#00ff88">Best for:</strong> wearables, vehicles, body-worn, battery-powered, anything near a phone</div>
+</div>
+<div style="background:#111;border:1px solid #ff883344;border-radius:12px;padding:2rem">
+<div style="font-size:3rem;font-weight:bold;color:#ff8833;margin-bottom:0.25rem">≤500KB</div>
+<div style="font-size:0.85rem;color:#ff8833;margin-bottom:1rem">WiFi / HTTP / TLS</div>
+<div style="color:#888;font-size:0.8rem;line-height:2">Direct LLM access · Self-contained · Coordinates spokes · Always-on</div>
+<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid #1a1a1a;color:#666;font-size:0.75rem"><strong style="color:#ff8833">Best for:</strong> autonomous sensors, greenhouses, factories, home automation, fleet coordination</div>
+</div>
+</div>
+
+<!-- Feature Matrix -->
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:1rem">Profile Comparison</h3>
+<div style="overflow-x:auto;margin-bottom:4rem">
+<table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+<thead>
+<tr><th style="text-align:left;padding:12px 16px;border-bottom:2px solid #222;color:#888;font-weight:600;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase">Feature</th><th style="padding:12px 16px;border-bottom:2px solid #222;color:#00ff88;font-weight:600;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;text-align:center">Spoke (180 KB)</th><th style="padding:12px 16px;border-bottom:2px solid #222;color:#ff8833;font-weight:600;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;text-align:center">Hub (≤500 KB)</th></tr>
+</thead>
+<tbody>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Binary size</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">180 KB</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">≤500 KB</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Transport</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">BLE / Serial</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">WiFi / HTTP / TLS</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">ReAct agent loop</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Tool execution</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ local tools</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ full toolset</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Persistent memory</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ flash</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ flash + filesystem</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Config management</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">LLM API calls</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="Handled by hub — not a limitation">via hub ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ direct</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">TLS / HTTPS</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="BLE link is local — no TLS required">not needed ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">GPIO / sensors</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ direct</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">API key on device</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#ffaa00;text-align:center" title="Key stays on hub/phone — never on edge device">❌ secure! ⚡</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ required</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Power draw</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">~10 mA</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">~100 mA</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Min hardware</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">$3 ESP32-C3</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">$5 ESP32-S3 / Pi</td></tr>
+<tr><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#e0e0e0">Offline capable</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ local ops</td><td style="padding:10px 16px;border-bottom:1px solid #1a1a1a;color:#00ff88;text-align:center">✅ queues calls</td></tr>
+</tbody>
+</table>
+<p style="color:#555;font-size:0.7rem;margin-top:0.5rem">⚡ = by design, not a limitation</p>
+</div>
+
+<!-- Use Case Cards -->
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:1rem">Use Case → Profile</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:4rem">
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🚗 Car OBD-II</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">SPOKE</span></div>
+<div style="font-size:0.7rem;color:#888">BLE to phone — no WiFi in the car needed</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🏋️ Exercise Bike</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">SPOKE</span></div>
+<div style="font-size:0.7rem;color:#888">Streams metrics over BLE to gym app</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">💍 Smart Ring</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">SPOKE</span></div>
+<div style="font-size:0.7rem;color:#888">Coin-cell power — every µA counts</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🧸 Toys</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">SPOKE</span></div>
+<div style="font-size:0.7rem;color:#888">No API keys on device — parent's phone is the hub</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🦾 Prosthetics</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#00ff8833;color:#00ff88;border:1px solid #00ff8844">SPOKE</span></div>
+<div style="font-size:0.7rem;color:#888">Ultra-low latency local tools, phone relays LLM</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🌱 Greenhouse</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#ff883322;color:#ff8833;border:1px solid #ff883344">HUB</span></div>
+<div style="font-size:0.7rem;color:#888">WiFi available — talks to LLM directly</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🏠 Smart Fridge</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#ff883322;color:#ff8833;border:1px solid #ff883344">HUB</span></div>
+<div style="font-size:0.7rem;color:#888">Always on WiFi, full HTTP toolset</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🏭 CNC Machine</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#ffffff11;color:#fff;border:1px solid #333">BOTH</span></div>
+<div style="font-size:0.7rem;color:#888">Spoke on spindle controller + hub for job mgmt</div>
+</div>
+<div style="background:#111;border:1px solid #222;border-radius:10px;padding:1rem">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem"><span style="color:#fff;font-weight:600;font-size:0.85rem">🚜 Fleet / Farm</span><span style="font-size:0.6rem;font-weight:700;letter-spacing:0.08em;padding:2px 8px;border-radius:4px;background:#ffffff11;color:#fff;border:1px solid #333">BOTH</span></div>
+<div style="font-size:0.7rem;color:#888">Spoke nodes on vehicles, hub at base station</div>
+</div>
+</div>
+
+<!-- Build Commands -->
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:1rem">Build Commands</h3>
+<div style="background:#0d0d0d;border:1px solid #222;border-radius:10px;overflow:hidden;margin-bottom:4rem">
+<div style="display:flex;align-items:center;gap:6px;padding:10px 16px;background:#141414;border-bottom:1px solid #1a1a1a">
+<span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span>
+<span style="width:10px;height:10px;border-radius:50%;background:#ffbd2e;display:inline-block"></span>
+<span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span>
+</div>
+<pre style="padding:20px;font-size:0.8rem;line-height:1.7;overflow-x:auto;margin:0"><span style="color:#888"># Spoke: BLE/Serial agent (180KB)</span>
+<span style="color:#00ff88">zig build</span> <span style="color:#ff8833">-Dprofile=spoke</span> <span style="color:#ff8833">-Doptimize=ReleaseSmall</span>
+
+<span style="color:#888"># Hub: Full HTTP agent (≤500KB)</span>
+<span style="color:#00ff88">zig build</span> <span style="color:#ff8833">-Dprofile=hub</span> <span style="color:#ff8833">-Doptimize=ReleaseSmall</span></pre>
+</div>
+
+<!-- BLE Bandwidth -->
+<div style="background:#111;border:1px solid #222;border-radius:12px;padding:2rem;max-width:600px;margin-bottom:2rem">
+<h3 style="color:#fff;font-size:1.1rem;margin-bottom:1rem">BLE Bandwidth vs LLM Token Stream</h3>
+<div style="margin-bottom:1rem">
+<div style="font-size:0.7rem;color:#888;margin-bottom:4px">LLM token stream — ~1 KB/sec</div>
+<div style="height:28px;background:#1a1a1a;border-radius:6px;overflow:hidden"><div style="height:100%;width:1.25%;min-width:70px;border-radius:6px;background:#ff6b6b;display:flex;align-items:center;padding-left:10px;font-size:0.7rem;font-weight:700;color:#fff;white-space:nowrap">1 KB/s</div></div>
+</div>
+<div style="margin-bottom:1.25rem">
+<div style="font-size:0.7rem;color:#888;margin-bottom:4px">BLE 5.0 throughput — ~80 KB/sec</div>
+<div style="height:28px;background:#1a1a1a;border-radius:6px;overflow:hidden"><div style="height:100%;width:100%;border-radius:6px;background:#00ff88;display:flex;align-items:center;padding-left:10px;font-size:0.7rem;font-weight:700;color:#000;white-space:nowrap">80 KB/s</div></div>
+</div>
+<p style="font-size:0.8rem;color:#e0e0e0;text-align:center">BLE has <strong style="color:#00ff88">80×</strong> more bandwidth than an LLM stream needs.<br><span style="color:#888;font-size:0.75rem">The bottleneck is always the AI, never the transport.</span></p>
+</div>
+
+</div>
+
 <div class="section">
 <h2><img src="assets/mascot-small.jpg" alt="" class="mascot-inline">How it compares</h2>
 <p style="color:#888;margin-bottom:1rem;font-size:0.85rem">Embedded AI agent runtimes — a new category.</p>
 <table>
 <tr><th></th><th>KrillClaw™</th><th>MimiClaw</th><th>PicoClaw</th><th>OpenClaw</th></tr>
 <tr><td>Language</td><td class="highlight">Zig</td><td>C</td><td>Go</td><td>Node.js</td></tr>
-<tr><td>Binary size</td><td class="highlight">180 KB</td><td>~2 MB</td><td>~8 MB</td><td>~200 MB</td></tr>
+<tr><td>Binary size</td><td class="highlight">180 KB / ≤500 KB</td><td>~2 MB</td><td>~8 MB</td><td>~200 MB</td></tr>
 <tr><td>RAM usage</td><td class="highlight">2 MB</td><td>~512 KB</td><td>~10 MB</td><td>~200 MB</td></tr>
 <tr><td>Source</td><td class="highlight">~3,500 LOC</td><td>~7K LOC</td><td>?</td><td>~40K LOC</td></tr>
 <tr><td>Dependencies</td><td class="highlight">0</td><td>ESP-IDF</td><td>Go stdlib</td><td>~108 npm</td></tr>
@@ -297,12 +477,16 @@ export ANTHROPIC_API_KEY=...
 <div class="section">
 <h2>16 files. ~3,500 lines. The entire runtime.</h2>
 <p style="color:#888;margin-bottom:1.5rem">You can read the entire codebase in an hour.</p>
-<pre class="install" style="max-width:500px">agent.zig    — core loop (250 lines)
-api.zig      — multi-provider HTTP (329 lines)
-stream.zig   — SSE parser (344 lines)
+<pre class="install" style="max-width:550px"><span style="color:#888"># Both profiles</span>
+agent.zig    — core loop (250 lines)
 json.zig     — hand-rolled JSON (500 lines)
-tools_coding.zig — 7 tools (280 lines)
-context.zig  — token management (225 lines)</pre>
+context.zig  — token management (225 lines)
+stream.zig   — SSE parser (344 lines)
+transport.zig — BLE/serial abstraction
+
+<span style="color:#00ff88"># Hub only</span>
+api.zig      — multi-provider HTTP (329 lines)
+tools_coding.zig — 7 tools (280 lines)</pre>
 <p style="color:#888;margin-top:1rem">Works with any OpenAI-compatible LLM provider. Switch with a flag.</p>
 </div>
 
