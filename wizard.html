@@ -39,6 +39,7 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 .field label{display:block;color:#888;font-size:0.75rem;margin-bottom:0.4rem;text-transform:uppercase;letter-spacing:0.05em}
 .field input,.field select{width:100%;padding:0.7rem 0.8rem;background:#0a0a0a;border:1px solid #222;border-radius:8px;color:#fff;font-family:inherit;font-size:0.85rem;transition:border-color 0.2s}
 .field input:focus,.field select:focus{outline:none;border-color:#00ff88}
+optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}option{color:#fff;background:#0a0a0a;font-weight:normal}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.8rem center}
 .field .hint{color:#444;font-size:0.7rem;margin-top:0.3rem}
 
@@ -167,13 +168,36 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 <label>Provider</label>
 <select id="llm-provider" onchange="updateProviderUI()">
 <option value="">Select provider...</option>
+<optgroup label="Major Providers">
 <option value="anthropic">Anthropic (Claude)</option>
 <option value="openai">OpenAI (GPT)</option>
-<option value="ollama">Ollama (Local)</option>
-<option value="groq">Groq</option>
 <option value="deepseek">DeepSeek</option>
+<option value="mistral">Mistral</option>
+<option value="cohere">Cohere</option>
+<option value="google">Google Vertex AI</option>
+</optgroup>
+<optgroup label="Fast Inference">
+<option value="groq">Groq</option>
+<option value="cerebras">Cerebras</option>
+<option value="siliconflow">SiliconFlow</option>
+</optgroup>
+<optgroup label="Aggregators">
 <option value="openrouter">OpenRouter</option>
-<option value="custom">Custom endpoint</option>
+<option value="deepinfra">DeepInfra</option>
+<option value="huggingface">Hugging Face</option>
+</optgroup>
+<optgroup label="Cloud Platforms">
+<option value="azure">Azure OpenAI</option>
+<option value="bedrock">AWS Bedrock</option>
+</optgroup>
+<optgroup label="Self-Hosted">
+<option value="ollama">Ollama (Local)</option>
+<option value="vllm">vLLM</option>
+<option value="litellm">LiteLLM</option>
+</optgroup>
+<optgroup label="Other">
+<option value="custom">Custom OpenAI-compatible endpoint</option>
+</optgroup>
 </select>
 </div>
 <div class="field" id="api-key-field" style="display:none">
@@ -281,8 +305,10 @@ function selectWifi(el,name){
 }
 function updateProviderUI(){
   var v=document.getElementById('llm-provider').value;
-  document.getElementById('api-key-field').style.display=(v&&v!=='ollama')?'block':'none';
-  document.getElementById('endpoint-field').style.display=(v==='ollama'||v==='custom')?'block':'none';
+  var selfHosted=['ollama','vllm','litellm'];
+  var needsEndpoint=['ollama','vllm','litellm','custom','azure','bedrock'];
+  document.getElementById('api-key-field').style.display=(v&&selfHosted.indexOf(v)===-1)?'block':'none';
+  document.getElementById('endpoint-field').style.display=(needsEndpoint.indexOf(v)!==-1)?'block':'none';
 }
 function selectProfile(el){
   document.querySelectorAll('.profile-opt').forEach(p=>p.classList.remove('selected'));
