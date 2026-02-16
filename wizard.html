@@ -14,8 +14,9 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 .wizard-header{background:linear-gradient(135deg,#0a1a0f,#0a0a0a);padding:2rem;text-align:center;border-bottom:1px solid #1a1a1a;position:relative;overflow:hidden}
 .wizard-header::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,#00ff8808,transparent 50%),radial-gradient(circle at 70% 30%,#00aaff05,transparent 40%);pointer-events:none}
 
-/* Pixel krill ASCII art */
-.krill-art{font-size:0.55rem;line-height:1.1;color:#00ff88;margin-bottom:1rem;white-space:pre;opacity:0.9;letter-spacing:0.05em}
+/* Pixel art krill */
+.krill-pixel{display:inline-grid;grid-template-columns:repeat(20,6px);grid-template-rows:repeat(12,6px);gap:1px;margin-bottom:1rem;opacity:0.95}
+.krill-pixel span{border-radius:1px}
 
 .wizard-header h1{font-size:1.3rem;color:#00ff88;margin-bottom:0.25rem;position:relative}
 .wizard-header .tm{font-size:0.7rem;vertical-align:super}
@@ -42,6 +43,7 @@ body{background:#0a0a0a;color:#e0e0e0;font-family:'SF Mono','Courier New',monosp
 optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}option{color:#fff;background:#0a0a0a;font-weight:normal}
 .field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.8rem center}
 .field .hint{color:#444;font-size:0.7rem;margin-top:0.3rem}
+.field .model-sub{color:#555;font-size:0.7rem;margin-top:0.2rem;padding-left:0.2rem}
 
 /* Profile cards */
 .profiles{display:flex;flex-direction:column;gap:0.6rem}
@@ -90,16 +92,7 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 
 <div class="wizard">
 <div class="wizard-header">
-<pre class="krill-art">
-        ╭──╮
-   ╭───╯  ╰──╮    ○ ○
-  ╭╯  ●       ╰─╮  ╲╱
- ╭╯    ╭────╮    ╰──╮
-╭╯   ╭╯    ╰╮    ╭──╯
-╰╮  ╭╯      ╰──╮╭╯
-  ╰─╯  ╱╲╱╲╱╲  ╰╯
-       ╱╱╱╱╱╱╱
-</pre>
+<div class="krill-pixel" id="krill-art"></div>
 <h1>KrillClaw<span class="tm">™</span></h1>
 <p>Setup Wizard</p>
 <div class="progress">
@@ -168,35 +161,34 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 <label>Provider</label>
 <select id="llm-provider" onchange="updateProviderUI()">
 <option value="">Select provider...</option>
-<optgroup label="Major Providers">
-<option value="anthropic">Anthropic (Claude)</option>
-<option value="openai">OpenAI (GPT)</option>
-<option value="deepseek">DeepSeek</option>
-<option value="mistral">Mistral</option>
-<option value="cohere">Cohere</option>
-<option value="google">Google Vertex AI</option>
-</optgroup>
-<optgroup label="Fast Inference">
-<option value="groq">Groq</option>
-<option value="cerebras">Cerebras</option>
+<optgroup label="☁️ Cloud Providers">
+<option value="openai">OpenAI — GPT-4o, GPT-4, GPT-3.5</option>
+<option value="anthropic">Anthropic — Claude 4, Claude 3.5 Sonnet, Claude 3 Haiku</option>
+<option value="google">Google — Gemini 2.5 Pro, Gemini 2.5 Flash</option>
+<option value="mistral">Mistral — Mistral Large, Mistral Medium, Codestral</option>
+<option value="deepseek">DeepSeek — DeepSeek V3, DeepSeek Coder</option>
+<option value="cohere">Cohere — Command R+</option>
+<option value="groq">Groq — Llama 3 70B, Mixtral</option>
+<option value="cerebras">Cerebras — ultra-fast inference</option>
 <option value="siliconflow">SiliconFlow</option>
-</optgroup>
-<optgroup label="Aggregators">
-<option value="openrouter">OpenRouter</option>
-<option value="deepinfra">DeepInfra</option>
-<option value="huggingface">Hugging Face</option>
-</optgroup>
-<optgroup label="Cloud Platforms">
 <option value="azure">Azure OpenAI</option>
 <option value="bedrock">AWS Bedrock</option>
+<option value="vertex">Google Vertex AI</option>
 </optgroup>
-<optgroup label="Self-Hosted">
-<option value="ollama">Ollama (Local)</option>
-<option value="vllm">vLLM</option>
-<option value="litellm">LiteLLM</option>
+<optgroup label="🏠 Open Source / Local">
+<option value="ollama">Ollama (Local) — Llama 3, Mistral, Phi-3, CodeLlama</option>
+<option value="vllm">vLLM (self-hosted)</option>
 </optgroup>
-<optgroup label="Other">
-<option value="custom">Custom OpenAI-compatible endpoint</option>
+<optgroup label="🔀 Aggregators">
+<option value="openrouter">OpenRouter — access to 100+ models</option>
+<option value="together">Together AI</option>
+<option value="fireworks">Fireworks AI</option>
+<option value="deepinfra">DeepInfra</option>
+<option value="huggingface">Hugging Face Inference</option>
+<option value="litellm">LiteLLM (universal proxy)</option>
+</optgroup>
+<optgroup label="⚙️ Custom">
+<option value="custom">Any OpenAI-compatible endpoint (custom URL)</option>
 </optgroup>
 </select>
 </div>
@@ -276,6 +268,36 @@ optgroup{color:#00ff88;font-style:normal;font-weight:bold;background:#0a0a0a}opt
 </div>
 
 <script>
+// Pixel art krill - 20x12 grid
+// Colors: 0=transparent, g=#00ff88, o=#ff6600, b=#00aaff, d=#006644, w=#ffffff
+(function(){
+var rows=[
+  '00000000gggg00000000',
+  '000000gg00oogo000000',
+  '00000g00wo000og00000',
+  '0000gooo0000000g0000',
+  '000g00gggggg0000gb00',
+  '00g00g0000og00gbb000',
+  '00g0g000000ggg00000b',
+  '000gg0000ggg00000b00',
+  '0000gggggg0000000000',
+  '000000g0g0g000000000',
+  '00000g00g00g00000000',
+  '0000g000g000g0000000',
+];
+var colors={g:'#00ff88',o:'#ff6600',b:'#00aaff',d:'#006644',w:'#ffffff'};
+var el=document.getElementById('krill-art');
+for(var r=0;r<rows.length;r++){
+  for(var c=0;c<rows[r].length;c++){
+    var px=document.createElement('span');
+    var ch=rows[r][c];
+    px.style.background=colors[ch]||'transparent';
+    px.style.width='6px';px.style.height='6px';px.style.display='inline-block';
+    el.appendChild(px);
+  }
+}
+})();
+
 function goStep(n){
   document.querySelectorAll('.step').forEach(s=>s.classList.remove('active'));
   document.getElementById('step'+n).classList.add('active');
@@ -285,7 +307,6 @@ function goStep(n){
     if(i<n)d.classList.add('done');
     if(i===n)d.classList.add('active');
   }
-  // Simulate WiFi scan
   if(n===1){
     document.getElementById('wifi-scan').style.display='flex';
     document.getElementById('wifi-list').style.display='none';
@@ -305,8 +326,8 @@ function selectWifi(el,name){
 }
 function updateProviderUI(){
   var v=document.getElementById('llm-provider').value;
-  var selfHosted=['ollama','vllm','litellm'];
-  var needsEndpoint=['ollama','vllm','litellm','custom','azure','bedrock'];
+  var selfHosted=['ollama','vllm'];
+  var needsEndpoint=['ollama','vllm','litellm','custom','azure','bedrock','vertex'];
   document.getElementById('api-key-field').style.display=(v&&selfHosted.indexOf(v)===-1)?'block':'none';
   document.getElementById('endpoint-field').style.display=(needsEndpoint.indexOf(v)!==-1)?'block':'none';
 }
