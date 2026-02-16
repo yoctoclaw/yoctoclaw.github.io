@@ -30,10 +30,6 @@ td:first-child{text-align:left;color:#fff;font-weight:bold}
 .highlight{color:#00ff88;font-weight:bold}
 h2{color:#00ff88;margin:3rem 0 1rem;font-size:1.5rem}
 .section{padding:2rem 0;border-top:1px solid #1a1a1a}
-.hardware{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
-.hw-card{background:#111;border:1px solid #222;border-radius:8px;padding:1.5rem;text-align:center}
-.hw-card .price{font-size:1.5rem;color:#00ff88;font-weight:bold}
-.hw-card .name{color:#fff;margin:0.5rem 0}
 footer{text-align:center;padding:3rem 0;color:#555;font-size:0.85rem;border-top:1px solid #1a1a1a;margin-top:3rem}
 a{color:#00ff88;text-decoration:none}
 a:hover{text-decoration:underline}
@@ -56,6 +52,43 @@ a:hover{text-decoration:underline}
 .marquee-tag:hover{border-color:#00ff88;color:#00ff88;border-width:2px;padding:calc(0.4rem - 1px) calc(0.8rem - 1px)}
 @keyframes scrollLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes scrollRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+
+/* Carousel styles */
+.carousel-container{position:relative;overflow:hidden}
+.carousel-tabs{display:flex;justify-content:center;gap:0.5rem;margin-bottom:1.5rem}
+.carousel-tab{background:#111;border:1px solid #333;color:#888;padding:0.6rem 1.2rem;border-radius:20px;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.carousel-tab:hover{border-color:#00ff88;color:#00ff88;transform:scale(1.05)}
+.carousel-tab.active{background:#00ff8815;border-color:#00ff88;color:#00ff88;transform:scale(1.05)}
+.carousel-viewport{overflow:hidden;border-radius:12px}
+.carousel-track{display:flex;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+.carousel-column{min-width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;padding:0.5rem}
+.carousel-dots{display:flex;justify-content:center;gap:0.5rem;margin-top:1.2rem}
+.dot{width:8px;height:8px;border-radius:50%;background:#333;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1)}
+.dot:hover{background:#00ff8880;transform:scale(1.3)}
+.dot.active{background:#00ff88;transform:scale(1.3)}
+
+/* Card v2 — bouncy entrance */
+.hw-card-v2{background:#111;border:1px solid #222;border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;opacity:0;transform:translateY(30px) scale(0.9);transition:all 0.3s ease}
+.hw-card-v2:hover{border-color:#00ff88;transform:translateY(-4px) scale(1.03) !important;box-shadow:0 8px 30px #00ff8815}
+.carousel-column.active .hw-card-v2{animation:bounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;animation-delay:calc(var(--i) * 0.08s)}
+@keyframes bounceIn{
+0%{opacity:0;transform:translateY(40px) scale(0.8)}
+60%{opacity:1;transform:translateY(-8px) scale(1.02)}
+80%{transform:translateY(3px) scale(0.99)}
+100%{opacity:1;transform:translateY(0) scale(1)}
+}
+.hw-card-v2 .price{font-size:1.5rem;color:#00ff88;font-weight:bold}
+.hw-card-v2 .name{color:#fff;margin:0.4rem 0;font-weight:600;font-size:0.95rem}
+.hw-card-v2 .spec{color:#555;font-size:0.8rem}
+.hw-card-v2 .profile-badge{display:inline-block;margin-top:0.6rem;padding:0.2rem 0.6rem;border-radius:10px;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.05em}
+.profile-badge[data-profile]{}
+.carousel-column[data-column="devboards"] .profile-badge{background:#00ff8815;color:#00ff88}
+.carousel-column[data-column="iot"] .profile-badge{background:#00aaff15;color:#00aaff}
+.carousel-column[data-column="robotics"] .profile-badge{background:#ff660015;color:#ff8833}
+
+/* Swipe hint */
+.swipe-hint{text-align:center;color:#444;font-size:0.75rem;margin-top:0.5rem;animation:fadeInOut 3s ease-in-out 2s forwards}
+@keyframes fadeInOut{0%{opacity:0}20%{opacity:1}80%{opacity:1}100%{opacity:0}}
 </style>
 </head>
 <body>
@@ -129,11 +162,53 @@ context.zig  — token management (225 lines)</pre>
 <div class="section">
 <h2>Runs on a $3 chip</h2>
 <p style="color:#888;margin-bottom:1.5rem">BLE and serial transport built in. Your phone bridges it to Claude.</p>
-<div class="hardware">
-<div class="hw-card"><div class="price">$3</div><div class="name">ESP32-C3</div><div style="color:#555">RISC-V, BLE 5.0</div></div>
-<div class="hw-card"><div class="price">$6</div><div class="name">Raspberry Pi Pico</div><div style="color:#555">RP2040, Serial</div></div>
-<div class="hw-card"><div class="price">$20</div><div class="name">Colmi R02 Ring</div><div style="color:#555">BLE, wearable agent</div></div>
-<div class="hw-card"><div class="price">$50</div><div class="name">nRF5340 DK</div><div style="color:#555">BLE 5.3, dual-core</div></div>
+
+<div class="carousel-container">
+<div class="carousel-tabs">
+<button class="carousel-tab active" data-tab="devboards">🔧 Dev Boards</button>
+<button class="carousel-tab" data-tab="iot">📡 IoT</button>
+<button class="carousel-tab" data-tab="robotics">🤖 Robotics</button>
+</div>
+
+<div class="carousel-viewport">
+<div class="carousel-track">
+
+<div class="carousel-column active" data-column="devboards">
+<div class="hw-card-v2" style="--i:0"><div class="price">$3</div><div class="name">ESP32-C3</div><div class="spec">RISC-V, BLE 5.0</div><div class="profile-badge">coding</div></div>
+<div class="hw-card-v2" style="--i:1"><div class="price">$6</div><div class="name">Raspberry Pi Pico</div><div class="spec">RP2040, Serial</div><div class="profile-badge">coding</div></div>
+<div class="hw-card-v2" style="--i:2"><div class="price">$8</div><div class="name">Milk-V Duo</div><div class="spec">RISC-V, Linux</div><div class="profile-badge">coding</div></div>
+<div class="hw-card-v2" style="--i:3"><div class="price">$20</div><div class="name">Colmi R02 Ring</div><div class="spec">BLE, wearable agent</div><div class="profile-badge">coding</div></div>
+<div class="hw-card-v2" style="--i:4"><div class="price">$50</div><div class="name">nRF5340 DK</div><div class="spec">BLE 5.3, dual-core</div><div class="profile-badge">coding</div></div>
+<div class="hw-card-v2" style="--i:5"><div class="price">$15</div><div class="name">Flipper Zero</div><div class="spec">Sub-GHz, NFC, BLE</div><div class="profile-badge">coding</div></div>
+</div>
+
+<div class="carousel-column" data-column="iot">
+<div class="hw-card-v2" style="--i:0"><div class="price">$3</div><div class="name">ESP32-C3</div><div class="spec">WiFi + BLE sensor hub</div><div class="profile-badge">iot</div></div>
+<div class="hw-card-v2" style="--i:1"><div class="price">$5</div><div class="name">ESP8266</div><div class="spec">WiFi, MQTT native</div><div class="profile-badge">iot</div></div>
+<div class="hw-card-v2" style="--i:2"><div class="price">$12</div><div class="name">LoRa Node</div><div class="spec">Long range mesh</div><div class="profile-badge">iot</div></div>
+<div class="hw-card-v2" style="--i:3"><div class="price">$8</div><div class="name">Zigbee Coordinator</div><div class="spec">Thread / Matter bridge</div><div class="profile-badge">iot</div></div>
+<div class="hw-card-v2" style="--i:4"><div class="price">$25</div><div class="name">Smart Thermostat</div><div class="spec">Temp + humidity + relay</div><div class="profile-badge">iot</div></div>
+<div class="hw-card-v2" style="--i:5"><div class="price">$15</div><div class="name">Soil Sensor Hub</div><div class="spec">Moisture, pH, NPK</div><div class="profile-badge">iot</div></div>
+</div>
+
+<div class="carousel-column" data-column="robotics">
+<div class="hw-card-v2" style="--i:0"><div class="price">$6</div><div class="name">Pi Pico + Motor</div><div class="spec">Servo control, PWM</div><div class="profile-badge">robotics</div></div>
+<div class="hw-card-v2" style="--i:1"><div class="price">$35</div><div class="name">Jetson Nano</div><div class="spec">GPU, vision pipeline</div><div class="profile-badge">robotics</div></div>
+<div class="hw-card-v2" style="--i:2"><div class="price">$50</div><div class="name">nRF5340 DK</div><div class="spec">Real-time motor ctrl</div><div class="profile-badge">robotics</div></div>
+<div class="hw-card-v2" style="--i:3"><div class="price">$20</div><div class="name">Stepper Board</div><div class="spec">4-axis CNC / 3D printer</div><div class="profile-badge">robotics</div></div>
+<div class="hw-card-v2" style="--i:4"><div class="price">$45</div><div class="name">Lidar Module</div><div class="spec">360° SLAM mapping</div><div class="profile-badge">robotics</div></div>
+<div class="hw-card-v2" style="--i:5"><div class="price">$30</div><div class="name">Robot Arm Kit</div><div class="spec">6-DOF, serial control</div><div class="profile-badge">robotics</div></div>
+</div>
+
+</div>
+</div>
+
+<div class="carousel-dots">
+<span class="dot active" data-tab="devboards"></span>
+<span class="dot" data-tab="iot"></span>
+<span class="dot" data-tab="robotics"></span>
+</div>
+<p class="swipe-hint">← swipe to explore →</p>
 </div>
 </div>
 
@@ -171,6 +246,68 @@ Built by <a href="https://accelerando.ai">Accelerando AI</a> · MIT License · <
   "codeRepository": "https://github.com/yoctoclaw/TinyDancer",
   "license": "https://opensource.org/licenses/MIT"
 }
+</script>
+
+<script>
+(function(){
+  const tabs = document.querySelectorAll('.carousel-tab');
+  const dots = document.querySelectorAll('.dot');
+  const track = document.querySelector('.carousel-track');
+  const columns = document.querySelectorAll('.carousel-column');
+  const viewport = document.querySelector('.carousel-viewport');
+  let current = 0;
+
+  function goTo(index) {
+    current = index;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    tabs.forEach(t => t.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    columns.forEach(c => {
+      c.classList.remove('active');
+      // Reset animations
+      c.querySelectorAll('.hw-card-v2').forEach(card => {
+        card.style.animation = 'none';
+        card.offsetHeight; // trigger reflow
+        card.style.animation = '';
+      });
+    });
+    tabs[index].classList.add('active');
+    dots[index].classList.add('active');
+    columns[index].classList.add('active');
+  }
+
+  tabs.forEach((tab, i) => tab.addEventListener('click', () => goTo(i)));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+  // Touch/swipe support
+  let startX = 0, startY = 0, isDragging = false;
+  viewport.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  }, {passive: true});
+  viewport.addEventListener('touchend', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx < 0 && current < columns.length - 1) goTo(current + 1);
+      else if (dx > 0 && current > 0) goTo(current - 1);
+    }
+  }, {passive: true});
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' && current < columns.length - 1) goTo(current + 1);
+    if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+  });
+
+  // Auto-cycle every 5s if not interacted
+  let autoTimer = setInterval(() => goTo((current + 1) % columns.length), 5000);
+  viewport.addEventListener('touchstart', () => clearInterval(autoTimer), {once: true});
+  document.querySelector('.carousel-container').addEventListener('click', () => clearInterval(autoTimer), {once: true});
+})();
 </script>
 
 </body>
