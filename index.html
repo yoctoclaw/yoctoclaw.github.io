@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KrillClaw™ — The Smallest Edge AI Agent Runtime</title>
-<meta name="description" content="KrillClaw is the smallest AI agent runtime for edge devices. 49KB binary in Zig. Zero dependencies. Tested on 350+ edge devices. Zero dependencies. Written in Zig. Works with any OpenAI-compatible LLM.">
+<meta name="description" content="KrillClaw — the smallest AI agent runtime. 49KB binary, zero dependencies, written in Zig. Tested on 350+ edge devices. Works with any OpenAI-compatible LLM.">
 <meta name="keywords" content="edge AI, agent runtime, Zig, embedded AI, IoT, ESP32, microcontroller, LLM, Claude, OpenAI, Ollama, BLE, minimal, lightweight, zero dependencies">
 <meta property="og:title" content="KrillClaw™ — The Smallest Edge AI Agent Runtime">
 <meta property="og:description" content="49KB AI agent runtime. Tested on 350+ edge devices from $3 ESP32 to Raspberry Pi.">
@@ -195,8 +195,8 @@ export ANTHROPIC_API_KEY=...
 </div>
 <div class="feature-card">
 <div class="icon">🌐</div>
-<div class="title">27 LLM Providers</div>
-<div class="desc">Claude, GPT, Gemini, Llama, Qwen, Mistral, and 21 more. Switch providers in one line. Never locked in.</div>
+<div class="title">17+ LLM Providers</div>
+<div class="desc">Claude, GPT, Gemini, Llama, Qwen, Mistral, and more. Switch providers in one line. Never locked in.</div>
 </div>
 </div>
 </div>
@@ -404,6 +404,7 @@ export ANTHROPIC_API_KEY=...
 </table>
 <div style="margin-top:1.5rem;overflow:hidden;position:relative">
 <p style="color:#555;font-size:0.75rem;margin-bottom:0.5rem;text-align:center">Works with any OpenAI-compatible provider</p>
+<p style="color:#444;font-size:0.65rem;text-align:center;margin-top:0.5rem">Competitor data as of Feb 2026. Check their repos for latest.</p>
 <div style="display:flex;width:max-content;gap:1rem;animation:scrollProviders 30s linear infinite;padding:0.3rem 0">
 <span style="color:#666;font-size:0.8rem;white-space:nowrap">OpenAI</span>
 <span style="color:#444">·</span>
@@ -696,7 +697,8 @@ tools_coding.zig — 7 tools (280 lines)</pre>
 
 <div class="section" style="text-align:center">
 <h2>Get started</h2>
-<pre class="install" style="text-align:left">git clone https://github.com/krillclaw/krillclaw
+<pre class="install" style="text-align:left"># Coming soon — join the waitlist for early access
+git clone https://github.com/yoctoclaw/KrillClaw
 cd KrillClaw
 zig build -Doptimize=ReleaseSmall
 ./zig-out/bin/krillclaw "monitor sensors and alert on anomalies"</pre>
@@ -753,7 +755,7 @@ zig build -Doptimize=ReleaseSmall
 
 
 <footer>
-<img src="assets/mascot-small.jpg" alt="" class="mascot-footer">Built by <a href="https://accelerando.ai">Accelerando AI</a> · BSL 1.1 (→ Apache 2.0) · Patent Pending<br style="margin-top:0.5rem"><a href="privacy.html" style="color:#555">Privacy</a> · <a href="terms.html" style="color:#555">Terms</a> · <a href="#" class="secondary">Source</a> · <a href="mailto:hello@accelerando.ai" style="color:#555">hello@accelerando.ai</a>
+<img src="assets/mascot-small.jpg" alt="" class="mascot-footer">Built by <a href="https://accelerando.ai">Accelerando AI</a> · BSL 1.1 (→ Apache 2.0) · Patent Pending<br style="margin-top:0.5rem"><a href="privacy.html" style="color:#555">Privacy</a> · <a href="terms.html" style="color:#555">Terms</a> · <a href="/press" style="color:#555">Press</a> &middot; <a href="/license" style="color:#555">License</a> · <a href="mailto:hello@accelerando.ai" style="color:#555">hello@accelerando.ai</a>
 </footer>
 
 <script type="application/ld+json">
@@ -770,7 +772,7 @@ zig build -Doptimize=ReleaseSmall
     "priceCurrency": "USD"
   },
   "programmingLanguage": "Zig",
-  "codeRepository": "https://github.com/krillclaw/krillclaw",
+  
   "license": "https://mariadb.com/bsl11/"
 }
 </script>
@@ -899,6 +901,14 @@ function wlSubmit(){
     document.getElementById('wl-step3').style.display = '';
   });
 }
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does KrillClaw need WiFi?","acceptedAnswer":{"@type":"Answer","text":"Lite (49KB): No. Connects via BLE or serial to a nearby gateway. Full (≤500KB): Yes, connects directly to LLM APIs over WiFi/HTTP."}},
+{"@type":"Question","name":"What is the difference between Lite and Full?","acceptedAnswer":{"@type":"Answer","text":"Lite is a 49KB BLE/serial agent for ultra-constrained devices. Full is a ≤500KB agent with built-in HTTP/TLS for autonomous operation."}},
+{"@type":"Question","name":"How much does the API cost?","acceptedAnswer":{"@type":"Answer","text":"Typical usage: zsh.50–2/month. You bring your own API key and control the budget. KrillClaw itself is free."}},
+{"@type":"Question","name":"Is it really 49KB?","acceptedAnswer":{"@type":"Answer","text":"The lite profile is 49KB — BLE/serial transport, no HTTP stack, no TLS. The full profile is ≤500KB with HTTP/TLS. Both are smaller than any competitor."}}
+]}
 </script>
 </body>
 </html>
